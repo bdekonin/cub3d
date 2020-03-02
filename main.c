@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 13:41:15 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/02 17:33:29 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/02 17:48:42 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,26 @@ void test(t_vars *vars)
 		}
 		
 		wallsides(vars);
+			if (vars->tex.w_tex == 'N')
+			{
+				texWidth = vars->tex.w[0];
+				texHeight = vars->tex.h[0];
+			}
+			else if (vars->tex.w_tex == 'E')
+			{
+				texWidth = vars->tex.w[1];
+				texHeight = vars->tex.h[1];
+			}
+			else if (vars->tex.w_tex == 'S')
+			{
+				texWidth = vars->tex.w[2];
+				texHeight = vars->tex.h[2];
+			}
+			else if (vars->tex.w_tex == 'W')
+			{
+				texWidth = vars->tex.w[3];
+				texHeight = vars->tex.h[3];
+			}
 
 		// calcuate line height
 		int lineHeight = (int)vars->screen.screen_h / vars->eng.perp_wall_dist;
