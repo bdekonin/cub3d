@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 13:41:15 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/02/29 15:23:13 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/02 16:31:26 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,56 +51,52 @@ void map(t_vars *vars)
 
 }
 
+int file_north(t_vars *vars);
+int file_east(t_vars *vars);
+int file_south(t_vars *vars);
+int file_west(t_vars *vars);
+int file_sprite(t_vars *vars);
+
+int create_img(t_vars *vars)
+{
+	if (file_north(vars) == -1)
+		return (-1);
+	if (file_east(vars) == -1)
+		return (-1);
+	if (file_south(vars) == -1)
+		return (-1);
+	if (file_west(vars) == -1)
+		return (-1);
+	if (file_sprite(vars) == -1)
+		return (-1);
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_vars		vars;
 	int			ret;
 	char		*p;
-
+	if (argc < 2)
+		return (ft_puterror("Not enough arguments."));
 	p = ft_strrchr(argv[1], '.');
 	if (ft_strncmp(p, ".cub", 10) != 0)
 		return (ft_puterror("Argument is not a .cub file."));
-	if (argc < 2)
-		return (ft_puterror("Not enough arguments."));
+	printf("%s\n\n", argv[1]);
 	ret = parse_main(&vars, argv[1]);
 	if (ret == -1)
-	{
 		return (-1);
-	}
 	else if (argc < 2 || ret == 0)
 		return (ft_puterror("Argument not found."));
-	vars.mlx.mlx = mlx_init();
-    vars.mlx.mlx_win = mlx_new_window(vars.mlx.mlx, vars.screen.screen_w, vars.screen.screen_h, "Cub3d!");
-    vars.mlx.img = mlx_new_image(vars.mlx.mlx, vars.screen.screen_w, vars.screen.screen_h);
-    vars.mlx.addr = mlx_get_data_addr(vars.mlx.img, &vars.mlx.bits_pixel, &vars.mlx.line_length,
-                                 &vars.mlx.endian);
 	init_engine(&vars);
+	if (create_img(&vars) == -1)
+		return (-1);
 	engine_init(&vars);
-		// system("leaks a.out");
 	return (1);
-}
-
-void north(t_vars *vars)
-{
-	vars->tex.img[0] = mlx_png_file_to_image(vars->mlx.mlx, vars->cub.north, &vars->tex.w[0], &vars->tex.h[0]);
-	vars->tex.addr[0] = mlx_get_data_addr(vars->tex.img[0], &vars->tex.bits_pixel[0], &vars->tex.line_length[0], &vars->tex.endian[0]);
-
-	vars->tex.img[1] = mlx_png_file_to_image(vars->mlx.mlx, vars->cub.east, &vars->tex.w[1], &vars->tex.h[1]);
-	vars->tex.addr[1] = mlx_get_data_addr(vars->tex.img[1], &vars->tex.bits_pixel[1], &vars->tex.line_length[1], &vars->tex.endian[1]);
-
-	vars->tex.img[2] = mlx_png_file_to_image(vars->mlx.mlx, vars->cub.south, &vars->tex.w[2], &vars->tex.h[2]);
-	vars->tex.addr[2] = mlx_get_data_addr(vars->tex.img[2], &vars->tex.bits_pixel[2], &vars->tex.line_length[2], &vars->tex.endian[2]);
-
-	vars->tex.img[3] = mlx_png_file_to_image(vars->mlx.mlx, vars->cub.west, &vars->tex.w[3], &vars->tex.h[3]);
-	vars->tex.addr[3] = mlx_get_data_addr(vars->tex.img[3], &vars->tex.bits_pixel[3], &vars->tex.line_length[3], &vars->tex.endian[3]);
-
-	vars->tex.img[5] = mlx_png_file_to_image(vars->mlx.mlx, vars->cub.sprite, &vars->tex.w[5], &vars->tex.h[5]);
-	vars->tex.addr[5] = mlx_get_data_addr(vars->tex.img[5], &vars->tex.bits_pixel[5], &vars->tex.line_length[5], &vars->tex.endian[5]);
 }
 
 void test(t_vars *vars)
 {
-	north(vars);
 	int texWidth = 64;
 	int	texHeight = 64;
 	double ZBuffer[vars->screen.screen_w];
@@ -216,55 +212,53 @@ void test(t_vars *vars)
 		}
 		fill_background(x, drawStart, drawEnd, vars);
 	}
-	
-		for(int i = 0; i < vars->spr.sprite_count; i++)
+	for(int i = 0; i < vars->spr.sprite_count; i++)
+	{
+		double spriteY = vars->spr.sprite[i][0] - vars->player.pos_y;
+		double spriteX = vars->spr.sprite[i][1] - vars->player.pos_x;
+
+		double invDet = 1.0 / (vars->cam.planeX * vars->player.dir_y - vars->player.dir_x * vars->cam.planeY);
+		double transformX = invDet * (vars->player.dir_y * spriteX - vars->player.dir_x * spriteY);
+		double transformY = invDet * (-vars->cam.planeY * spriteX + vars->cam.planeX * spriteY);
+
+		int spriteScreenX = (int)(vars->screen.screen_w / 2) * (1 + transformX / transformY);
+		
+		int spriteHeight = fabs((int)vars->screen.screen_h / transformY);
+
+		int drawStartY = -spriteHeight / 2 + vars->screen.screen_h / 2;
+		if (drawStartY < 0)
+			drawStartY = 0;
+		int drawEndY = spriteHeight / 2 + vars->screen.screen_h / 2;
+		if (drawEndY >= vars->screen.screen_h)
+			drawEndY = vars->screen.screen_h - 1;
+
+		int spriteWidth = fabs((int)vars->screen.screen_h / transformY);
+		int drawStartX = -spriteWidth / 2 + spriteScreenX;
+		if (drawStartX < 0)
+			drawStartX = 0;
+		int drawEndX = spriteWidth / 2 + spriteScreenX;
+		if (drawEndX >= vars->screen.screen_w)
+			drawEndX = vars->screen.screen_w - 1;
+		
+		for(int stripe = drawStartX; stripe < drawEndX; stripe++)
 		{
-			double spriteY = vars->spr.sprite[i][0] - vars->player.pos_y;
-			double spriteX = vars->spr.sprite[i][1] - vars->player.pos_x;
-
-			double invDet = 1.0 / (vars->cam.planeX * vars->player.dir_y - vars->player.dir_x * vars->cam.planeY);
-			double transformX = invDet * (vars->player.dir_y * spriteX - vars->player.dir_x * spriteY);
-			double transformY = invDet * (-vars->cam.planeY * spriteX + vars->cam.planeX * spriteY);
-
-			int spriteScreenX = (int)(vars->screen.screen_w / 2) * (1 + transformX / transformY);
-			
-			int spriteHeight = fabs((int)vars->screen.screen_h / transformY);
-
-			int drawStartY = -spriteHeight / 2 + vars->screen.screen_h / 2;
-			if (drawStartY < 0)
-				drawStartY = 0;
-			int drawEndY = spriteHeight / 2 + vars->screen.screen_h / 2;
-			if (drawEndY >= vars->screen.screen_h)
-				drawEndY = vars->screen.screen_h - 1;
-
-			int spriteWidth = fabs((int)vars->screen.screen_h / transformY);
-			int drawStartX = -spriteWidth / 2 + spriteScreenX;
-			if (drawStartX < 0)
-				drawStartX = 0;
-			int drawEndX = spriteWidth / 2 + spriteScreenX;
-			if (drawEndX >= vars->screen.screen_w)
-				drawEndX = vars->screen.screen_w - 1;
-			
-			for(int stripe = drawStartX; stripe < drawEndX; stripe++)
+			unsigned int color;
+			int texX = (256 *(stripe - (-spriteWidth / 2 + spriteScreenX)) * texWidth / spriteWidth) / 256;
+			if (transformY > 0 && stripe > 0 && stripe < vars->screen.screen_w && transformY < ZBuffer[stripe])
+			for(int y = drawStartY; y < drawEndY; y++)
 			{
-				unsigned int color;
-				int texX = (256 *(stripe - (-spriteWidth / 2 + spriteScreenX)) * texWidth / spriteWidth) / 256;
-				if (transformY > 0 && stripe > 0 && stripe < vars->screen.screen_w && transformY < ZBuffer[stripe])
-				for(int y = drawStartY; y < drawEndY; y++)
-				{
-					int d = y * 256 - vars->screen.screen_h * 128 + spriteHeight * 128;
-					int texY = (d * texHeight) / spriteHeight / 256;
-					color = *(unsigned int*)(vars->tex.addr[5] + (texY * vars->tex.line_length[5] + texX * (vars->tex.bits_pixel[5] / 8)));
-					if ((color & 0x00FFFFFF) != 0)
-						my_mlx_pixel_put(vars, stripe, y, color);
-				}
+				int d = y * 256 - vars->screen.screen_h * 128 + spriteHeight * 128;
+				int texY = (d * texHeight) / spriteHeight / 256;
+				color = *(unsigned int*)(vars->tex.addr[4] + (texY * vars->tex.line_length[4] + texX * (vars->tex.bits_pixel[4] / 8)));
+				if ((color & 0x00FFFFFF) != 0)
+					my_mlx_pixel_put(vars, stripe, y, color);
 			}
 		}
+	}	
 }
 
 int testing(t_vars *vars)
 {
-	// map(vars);
 	test(vars);
 	if (vars->key.esc == 1)
 		close_win(vars);
@@ -283,11 +277,17 @@ int testing(t_vars *vars)
 
 int init_engine(t_vars *vars)
 {
+	vars->mlx.mlx = mlx_init();
+    vars->mlx.mlx_win = mlx_new_window(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h, "Cub3d!");
+    vars->mlx.img = mlx_new_image(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h);
+    vars->mlx.addr = mlx_get_data_addr(vars->mlx.img, &vars->mlx.bits_pixel, &vars->mlx.line_length,
+                                 &vars->mlx.endian);
 	init_key(vars);
 	vars->cam.planeX = 0;
 	vars->cam.planeY = 0.66;
 	vars->cam.rot_speed = 0.08;
 	vars->cam.move_speed = 0.10;
+	create_img(vars);
 	return (1);
 }
 

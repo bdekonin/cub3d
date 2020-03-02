@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:14:22 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/02/24 20:28:39 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/02 16:27:57 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void save_sprite(t_data *data, int y, int x)
 
 	data->sprite[i][0] = y;
 	data->sprite[i][1] = x;
-
 	data->sprite[i][0] += 0.5;
 	data->sprite[i][1] += 0.5;
 	i++;

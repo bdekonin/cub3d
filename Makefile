@@ -6,7 +6,7 @@
 #    By: bdekonin <bdekonin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/20 19:12:46 by bdekonin       #+#    #+#                 #
-#    Updated: 2020/02/29 15:17:57 by bdekonin      ########   odam.nl          #
+#    Updated: 2020/03/02 15:36:41 by bdekonin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ SRC = main.c utils.c \
 	engine/keys/key.c \
 	engine/keys/walking.c \
 	engine/render/wallsides.c \
-	parsing/gather_sprite.c
+	parsing/gather_sprite.c \
+	engine/render/create_image.c
 
 OBJ = $(SRC:.c=.o)
 CC = gcc -Wall -Wextra -Werror

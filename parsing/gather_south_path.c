@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 17:10:21 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/02/18 18:35:36 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/02 16:27:50 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static char		*read_south_path(char *line)
 		free(path);
 		return ("file");
 	}
+	close (fd);
 	return (path);
 }
 
