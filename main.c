@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 13:41:15 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/02 16:31:26 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/02 17:33:29 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,12 @@ int file_sprite(t_vars *vars);
 
 int create_img(t_vars *vars)
 {
+	vars->mlx.mlx = mlx_init();
+    vars->mlx.mlx_win = mlx_new_window(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h, "Cub3d!");
+    vars->mlx.img = mlx_new_image(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h);
+    vars->mlx.addr = mlx_get_data_addr(vars->mlx.img, &vars->mlx.bits_pixel, &vars->mlx.line_length,
+                                 &vars->mlx.endian);
+	
 	if (file_north(vars) == -1)
 		return (-1);
 	if (file_east(vars) == -1)
@@ -82,7 +88,6 @@ int	main(int argc, char **argv)
 	p = ft_strrchr(argv[1], '.');
 	if (ft_strncmp(p, ".cub", 10) != 0)
 		return (ft_puterror("Argument is not a .cub file."));
-	printf("%s\n\n", argv[1]);
 	ret = parse_main(&vars, argv[1]);
 	if (ret == -1)
 		return (-1);
@@ -195,21 +200,21 @@ void test(t_vars *vars)
 		{
 			if (texNum != 2)
 			{
-			unsigned int color;
-			int texY = (int)texPos & (texHeight - 1);
-			texPos += step;
-			if (vars->tex.w_tex == 'N')
-				color = *(unsigned int*)(vars->tex.addr[0] + (texY * vars->tex.line_length[0] + texX * (vars->tex.bits_pixel[0] / 8)));
-			else if (vars->tex.w_tex == 'E')
-				color = *(unsigned int*)(vars->tex.addr[1] + (texY * vars->tex.line_length[1] + texX * (vars->tex.bits_pixel[1] / 8)));
-			else if (vars->tex.w_tex == 'S')
-				color = *(unsigned int*)(vars->tex.addr[2] + (texY * vars->tex.line_length[2] + texX * (vars->tex.bits_pixel[2] / 8)));
-			else if (vars->tex.w_tex == 'W')
-				color = *(unsigned int*)(vars->tex.addr[3] + (texY * vars->tex.line_length[3] + texX * (vars->tex.bits_pixel[3] / 8)));
-			my_mlx_pixel_put(vars, x, y, color);
+				unsigned int color;
+				int texY = (int)texPos & (texHeight - 1);
+				texPos += step;
+				if (vars->tex.w_tex == 'N')
+					color = *(unsigned int*)(vars->tex.addr[0] + (texY * vars->tex.line_length[0] + texX * (vars->tex.bits_pixel[0] / 8)));
+				else if (vars->tex.w_tex == 'E')
+					color = *(unsigned int*)(vars->tex.addr[1] + (texY * vars->tex.line_length[1] + texX * (vars->tex.bits_pixel[1] / 8)));
+				else if (vars->tex.w_tex == 'S')
+					color = *(unsigned int*)(vars->tex.addr[2] + (texY * vars->tex.line_length[2] + texX * (vars->tex.bits_pixel[2] / 8)));
+				else if (vars->tex.w_tex == 'W')
+					color = *(unsigned int*)(vars->tex.addr[3] + (texY * vars->tex.line_length[3] + texX * (vars->tex.bits_pixel[3] / 8)));
+				my_mlx_pixel_put(vars, x, y, color);
 			}
-		ZBuffer[x] = vars->eng.perp_wall_dist;
 		}
+		ZBuffer[x] = vars->eng.perp_wall_dist;
 		fill_background(x, drawStart, drawEnd, vars);
 	}
 	for(int i = 0; i < vars->spr.sprite_count; i++)
@@ -277,17 +282,11 @@ int testing(t_vars *vars)
 
 int init_engine(t_vars *vars)
 {
-	vars->mlx.mlx = mlx_init();
-    vars->mlx.mlx_win = mlx_new_window(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h, "Cub3d!");
-    vars->mlx.img = mlx_new_image(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h);
-    vars->mlx.addr = mlx_get_data_addr(vars->mlx.img, &vars->mlx.bits_pixel, &vars->mlx.line_length,
-                                 &vars->mlx.endian);
 	init_key(vars);
 	vars->cam.planeX = 0;
 	vars->cam.planeY = 0.66;
 	vars->cam.rot_speed = 0.08;
 	vars->cam.move_speed = 0.10;
-	create_img(vars);
 	return (1);
 }
 

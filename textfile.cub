@@ -1,9 +1,9 @@
 R 1200 800
-N      O textures/redbrick.png
+NO textures/greystone.png
 EA textures/greystone.png
-SO textures/bluestone.png
-WE textures/wood.png
-S textures/barrel.png
+SO textures/greystone.png
+WE textures/greystone.png
+S textures/greystone.png
 
 C 0,0,0
 F 0,0,0
