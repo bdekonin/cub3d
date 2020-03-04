@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/06 19:15:35 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/04 16:02:43 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/04 16:54:28 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,15 @@ typedef struct	s_mlx
 	int		line_length;
 	int		endian;
 }				t_mlx;
+
+typedef struct	s_nextframe
+{
+	void	*img;
+	char	*addr;
+	int		bits_pixel;
+	int		line_length;
+	int		endian;
+}				t_nextframe;
 
 typedef struct	s_south
 {
@@ -148,6 +157,7 @@ typedef struct	s_vars
 	t_texture	tex;
 	t_engine	eng;
 	t_sprite	spr;
+	t_nextframe	nframe;
 }				t_vars;
 
 int	ft_puterror(char *s);

@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 13:41:15 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/04 16:46:01 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/04 17:50:58 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,10 @@ int create_img(t_vars *vars)
     vars->mlx.img = mlx_new_image(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h);
     vars->mlx.addr = mlx_get_data_addr(vars->mlx.img, &vars->mlx.bits_pixel, &vars->mlx.line_length,
                                  &vars->mlx.endian);
+
+    vars->nframe.img = mlx_new_image(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h);
+    vars->nframe.addr = mlx_get_data_addr(vars->nframe.img, &vars->nframe.bits_pixel, &vars->nframe.line_length,
+                                 &vars->nframe.endian);
 	
 	if (file_north(vars) == -1)
 		return (-1);
@@ -336,6 +340,7 @@ int testing(t_vars *vars)
 		walk_left(vars);
 	else if (vars->key.d == 1)
 		walk_right(vars);
+	mlx_put_image_to_window(vars->mlx.mlx, vars->mlx.mlx_win, vars->mlx.img, 0, 0);
 	return (1);
 }
 
