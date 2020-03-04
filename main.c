@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 13:41:15 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/02 17:48:42 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/04 16:46:01 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,41 @@ int create_img(t_vars *vars)
 	if (file_sprite(vars) == -1)
 		return (-1);
 	return (1);
+}
+
+void sortsprite_one(t_vars *vars)
+{
+	for (int i = 0; i < vars->spr.sprite_count - 1; i++)
+	{
+		for (int i = 0; i < vars->spr.sprite_count - 1; i++)
+		{
+			if (vars->spr.sprite[i][2] < vars->spr.sprite[i + 1][2])
+			{
+				swap(&vars->spr.sprite[i][0], &vars->spr.sprite[i + 1][0]);
+				swap(&vars->spr.sprite[i][1], &vars->spr.sprite[i + 1][1]);
+				swap(&vars->spr.sprite[i][2], &vars->spr.sprite[i + 1][2]);
+			}
+		}
+	}
+}
+
+void calculate_dist_one(t_vars *vars)
+{
+	int i;
+	int y;
+	int x;
+
+	i = 0;
+	while (i < vars->spr.sprite_count)
+	{
+		x = vars->player.pos_x - vars->spr.sprite[i][1];
+		x *= (x < 0) ? -1 : 1;
+		y = vars->player.pos_y - vars->spr.sprite[i][0];
+		y *= (y < 0) ? -1 : 1;
+		vars->spr.sprite[i][2] = sqrt(y + x);
+		i++;
+	}
+	sortsprite_one(vars);
 }
 
 int	main(int argc, char **argv)
@@ -268,23 +303,25 @@ void test(t_vars *vars)
 		for(int stripe = drawStartX; stripe < drawEndX; stripe++)
 		{
 			unsigned int color;
-			int texX = (256 *(stripe - (-spriteWidth / 2 + spriteScreenX)) * texWidth / spriteWidth) / 256;
+			int texX = (256 *(stripe - (-spriteWidth / 2 + spriteScreenX)) * vars->tex.w[4] / spriteWidth) / 256;
 			if (transformY > 0 && stripe > 0 && stripe < vars->screen.screen_w && transformY < ZBuffer[stripe])
 			for(int y = drawStartY; y < drawEndY; y++)
 			{
 				int d = y * 256 - vars->screen.screen_h * 128 + spriteHeight * 128;
-				int texY = (d * texHeight) / spriteHeight / 256;
+				int texY = (d * vars->tex.h[4]) / spriteHeight / 256;
 				color = *(unsigned int*)(vars->tex.addr[4] + (texY * vars->tex.line_length[4] + texX * (vars->tex.bits_pixel[4] / 8)));
 				if ((color & 0x00FFFFFF) != 0)
 					my_mlx_pixel_put(vars, stripe, y, color);
 			}
 		}
-	}	
+	}
+	calculate_dist_one(vars);
 }
 
 int testing(t_vars *vars)
 {
 	test(vars);
+	// map(vars);
 	if (vars->key.esc == 1)
 		close_win(vars);
 	if (vars->key.w == 1)
@@ -295,24 +332,31 @@ int testing(t_vars *vars)
 		look_left(vars);
 	else if (vars->key.r_arr == 1)
 		look_right(vars);
-		// run(vars);
-	mlx_put_image_to_window(vars->mlx.mlx, vars->mlx.mlx_win, vars->mlx.img, 0, 0);
+	if (vars->key.a == 1)
+		walk_left(vars);
+	else if (vars->key.d == 1)
+		walk_right(vars);
 	return (1);
 }
 
 int init_engine(t_vars *vars)
 {
+	int x;
+	int y;
+
 	init_key(vars);
-	vars->cam.planeX = 0;
-	vars->cam.planeY = 0.66;
-	vars->cam.rot_speed = 0.08;
-	vars->cam.move_speed = 0.10;
+	vars->cam.rot_speed = 0.05;
+	vars->cam.move_speed = 0.09;
+	vars->player.pos_x += 0.5;
+	vars->player.pos_y += 0.5;
+	mlx_get_screen_size(vars->mlx.mlx, &x, &y);
+	vars->screen.screen_h = (vars->screen.screen_h > y) ? y : vars->screen.screen_h;
+	vars->screen.screen_w = (vars->screen.screen_w > x) ? x : vars->screen.screen_w;
 	return (1);
 }
 
 int engine_init(t_vars *vars)
 {
-	mlx_put_image_to_window(vars->mlx.mlx, vars->mlx.mlx_win, vars->mlx.img, 0, 0);
 	mlx_loop_hook(vars->mlx.mlx, testing, vars);
 	mlx_hook(vars->mlx.mlx_win, 2, (1L << 0), key_press, vars);
 	mlx_hook(vars->mlx.mlx_win, 3, (1L << 1), key_release, vars);

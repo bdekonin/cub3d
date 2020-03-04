@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:26:42 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/02/29 16:41:18 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/04 16:07:50 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,33 @@
 
 static void copy_dir(t_vars *vars, t_data *data)
 {
+	printf("%c\n", data->spawn_dir);
 	if (data->spawn_dir == 'N')
+	{
 		vars->player.dir_x = 0;
+		vars->player.dir_y = -1;
+		vars->cam.planeX = 0.66;
+		vars->cam.planeY = 0;
+	}
 	else if (data->spawn_dir == 'E')
-		vars->player.dir_x = 90;
+	{
+		vars->player.dir_x = 1;
+		vars->player.dir_y = 0;
+		vars->cam.planeX = 0;
+		vars->cam.planeY = -0.66;
+	}
 	else if (data->spawn_dir == 'S')
-		vars->player.dir_x = 180;
+	{
+		vars->player.dir_x = 1;
+		vars->cam.planeX = -0.66;
+	}
 	else if (data->spawn_dir == 'W')
-		vars->player.dir_x = 240;
-	vars->player.dir_x = 1;
-	vars->player.dir_y = 0;
+	{
+		vars->player.dir_x = -1;
+		vars->player.dir_y = 0;
+		vars->cam.planeX = 0;
+		vars->cam.planeY = -0.66;	
+	}
 }
 
 static void copy_data(t_vars *vars, t_data *data)

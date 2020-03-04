@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 22:01:48 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/02 15:15:52 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/04 12:37:18 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ int		replace_map(t_data *data, char *argv)
 	while (data->ret > 0)
 	{
 		data->ret = get_next_line(data->fd, &data->line);
-		if (ft_counter(data->line, '0') + ft_counter(data->line, '1') == 0 && data->ret != 0)
-			return (ft_puterror("replace_map | invalid map."));
+		// if (ft_counter(data->line, '0') + ft_counter(data->line, '1') == 0 && data->ret != 0)
+		// 	return (ft_puterror("replace_map | invalid map."));
 		if (data->ret < 0)
 			return (ft_puterror("replace_map | get_next_line failed."));
 		while (data->line[i] != '\0')
 		{
-			while (data->line[i] == ' ' && data->line[i] != '\0')
-				i++;
+			// while (data->line[i] == ' ' && data->line[i] != '\0')
+			// 	i++;
 			if (data->line[i] == 'N' || data->line[i] == 'S' ||
 			data->line[i] == 'E' || data->line[i] == 'W')
 			{
@@ -62,8 +62,8 @@ int		replace_map(t_data *data, char *argv)
 				save_sprite(data, y, x);
 			if (data->line[i] == '0' || data->line[i] == '1' || data->line[i] == '2')
 				data->map[y][x] = data->line[i] - 48;
-			else
-				data->map[y][x] = data->line[i];
+			// else
+			// 	data->map[y][x] = data->line[i];
 			x++;
 			i++;
 		}

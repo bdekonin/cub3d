@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 16:20:37 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/02/17 17:06:47 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/04 15:49:44 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ int				get_resolution(char *line, t_data *data)
 	{
 		return (ft_puterror("get_resolution | invalid resolution."));
 	}
-	data->screen_x = (data->screen_x > 2880) ? 2880 : data->screen_x;
-	data->screen_y = (data->screen_y > 1620) ? 1620 : data->screen_y;
 	data->res[0] = 'Y';
 	return (1);
 }

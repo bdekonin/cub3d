@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/06 19:15:35 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/02/24 19:08:50 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/04 16:02:43 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,8 +176,10 @@ void	forward(t_vars *vars);
 void	backwards(t_vars *vars);
 void	look_left(t_vars *vars);
 void	look_right(t_vars *vars);
-void	run(t_vars *vars);
-
+void	walk_right(t_vars *vars);
+void	walk_left(t_vars *vars);
 void wallsides(t_vars *vars);
+
+void swap(double *xp, double *yp);
 
 #endif
