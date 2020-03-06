@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 13:41:15 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/06 14:09:11 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/06 17:28:33 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	main(int argc, char **argv)
 	return (1);
 }
 
-void test(t_vars *vars)
+void renderframe(t_vars *vars)
 {
 	int texWidth = 64;
 	int	texHeight = 64;
@@ -291,7 +291,7 @@ void test(t_vars *vars)
 
 int testing(t_vars *vars)
 {
-	test(vars);
+	renderframe(vars);
 	// map(vars);
 	if (vars->key.esc == 1)
 		close_win(vars);

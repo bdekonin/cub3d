@@ -5,8 +5,8 @@
 #                                                      +:+                     #
 #    By: bdekonin <bdekonin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
-#    Created: 2020/02/20 19:12:46 by bdekonin       #+#    #+#                 #
-#    Updated: 2020/03/06 14:09:30 by bdekonin      ########   odam.nl          #
+#    Created: 2020/03/06 18:06:17 by bdekonin       #+#    #+#                 #
+#    Updated: 2020/03/06 18:07:52 by bdekonin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ libmlx.dylib:
 	@cd mlx && make && mv libmlx.dylib ..
 
 $(NAME): $(OBJ) $(MLX)
+	@$(MAKE) -C libft bonus
 	@$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(LIB)
 	
 %.o: %.c

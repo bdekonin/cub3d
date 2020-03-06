@@ -1,9 +1,9 @@
-R 600 257
+R 10000 500000
 NO textures/file1.xpm
 EA textures/file2.xpm
 SO textures/file3.xpm
 WE textures/wood.png
-S textures/BeholderDying2.xpm
+S textures/pixil-frame-0.png
 
 C 0,0,0
 F 0,0,0

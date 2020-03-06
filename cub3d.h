@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/06 19:15:35 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/06 14:09:39 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/06 17:29:13 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,11 @@ int	ft_puterror(char *s);
 
 int parse_main(t_vars *vars, char *argv);
 
+
+/*
+** Render
+*/
+void renderframe(t_vars *vars);
 /*
 **	Coloring
 */
