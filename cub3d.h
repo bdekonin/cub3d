@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/06 19:15:35 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/04 16:54:28 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/05 11:46:22 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ typedef struct	s_vars
 	t_engine	eng;
 	t_sprite	spr;
 	t_nextframe	nframe;
+	int			image;
 }				t_vars;
 
 int	ft_puterror(char *s);

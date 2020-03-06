@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 13:41:15 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/04 17:50:58 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/05 11:48:25 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -340,7 +340,16 @@ int testing(t_vars *vars)
 		walk_left(vars);
 	else if (vars->key.d == 1)
 		walk_right(vars);
-	mlx_put_image_to_window(vars->mlx.mlx, vars->mlx.mlx_win, vars->mlx.img, 0, 0);
+	if (vars->image == 0)
+	{
+		mlx_put_image_to_window(vars->mlx.mlx, vars->mlx.mlx_win, vars->mlx.img, 0, 0);
+		vars->image = 1;
+	}
+	else
+	{
+		mlx_put_image_to_window(vars->mlx.mlx, vars->mlx.mlx_win, vars->nframe.img, 0, 0);
+		vars->image = 0;
+	}
 	return (1);
 }
 
