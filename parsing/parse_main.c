@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:26:42 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/04 16:07:50 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/06 13:21:52 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 static void copy_dir(t_vars *vars, t_data *data)
 {
-	printf("%c\n", data->spawn_dir);
 	if (data->spawn_dir == 'N')
 	{
 		vars->player.dir_x = 0;
