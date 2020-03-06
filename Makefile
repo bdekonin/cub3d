@@ -6,11 +6,11 @@
 #    By: bdekonin <bdekonin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/20 19:12:46 by bdekonin       #+#    #+#                 #
-#    Updated: 2020/03/04 14:55:57 by bdekonin      ########   odam.nl          #
+#    Updated: 2020/03/06 14:09:30 by bdekonin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3D.out
+NAME = cub3D
 
 SRC = main.c utils.c \
 	get_next_line/get_next_line.c \
@@ -33,11 +33,12 @@ SRC = main.c utils.c \
 	engine/keys/walking.c \
 	engine/render/wallsides.c \
 	parsing/gather_sprite.c \
-	engine/render/create_image.c
+	engine/render/create_image.c \
+	engine/bmp/createbmp.c
 
 OBJ = $(SRC:.c=.o)
 CC = gcc -Wall -Wextra -Werror
-FLAGS = -O3 -L. -lmlx -framework OpenGL -framework AppKit
+FLAGS = -L. -lmlx -framework OpenGL -framework AppKit
 MLX = libmlx.dylib
 LIB = libft/libft.a
 INCLUDES = cub3D.h
@@ -49,8 +50,6 @@ libmlx.dylib:
 
 $(NAME): $(OBJ) $(MLX)
 	@$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(LIB)
-	@/bin/rm -f $(OBJ)
-	@./$(NAME) textfile.cub
 	
 %.o: %.c
 	@gcc -Imlx -Iinc -Ilibft -c $< -o $@
@@ -66,6 +65,6 @@ clean:
 	@/bin/rm -f .DS_Store
 
 fclean: clean
-	@/bin/rm -f $(NAME) $(MLX)
+	@/bin/rm -f $(NAME)
 	
 re: fclean all
