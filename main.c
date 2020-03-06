@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 13:41:15 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/05 11:48:25 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/06 14:09:11 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,49 +18,11 @@
 int init_engine(t_vars *vars);
 int engine_init(t_vars *vars);
 
-void map(t_vars *vars)
-{
-	for (int y = 0; y < vars->map.map_h; y++)
-	{
-		for(int loop = 0; loop < vars->map.map_w; loop++)
-		{
-			if ((int)vars->player.pos_y == y && (int)vars->player.pos_x == loop)
-			{
-				printf("\033[0;31m");
-				printf("N");
-				printf("\033[0m");
-			}
-			else if (vars->map.map[y][loop] == 1)
-			{
-				printf("\033[01;33m");
-				printf("%d", vars->map.map[y][loop]);
-				printf("\033[0m");
-			}
-			else if (vars->map.map[y][loop] == 2)
-			{
-				printf("\033[0;34m");
-				printf("%d", vars->map.map[y][loop]);
-				printf("\033[0m");
-			}
-			else
-				printf("%d", vars->map.map[y][loop]);
-		}
-		printf("\n");
-	}
-	printf("\n");
-
-}
-
-int file_north(t_vars *vars);
-int file_east(t_vars *vars);
-int file_south(t_vars *vars);
-int file_west(t_vars *vars);
-int file_sprite(t_vars *vars);
-
 int create_img(t_vars *vars)
 {
 	vars->mlx.mlx = mlx_init();
-    vars->mlx.mlx_win = mlx_new_window(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h, "Cub3d!");
+	if (vars->save == 0)
+    	vars->mlx.mlx_win = mlx_new_window(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h, "Cub3d!");
     vars->mlx.img = mlx_new_image(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h);
     vars->mlx.addr = mlx_get_data_addr(vars->mlx.img, &vars->mlx.bits_pixel, &vars->mlx.line_length,
                                  &vars->mlx.endian);
@@ -130,12 +92,17 @@ int	main(int argc, char **argv)
 	ret = parse_main(&vars, argv[1]);
 	if (ret == -1)
 		return (-1);
-	else if (argc < 2 || ret == 0)
+	else if (ret == 0)
 		return (ft_puterror("Argument not found."));
+	if (argc > 2 && ft_strncmp(argv[2], "--save", 7) == 0)
+		vars.save = 1;
 	init_engine(&vars);
 	if (create_img(&vars) == -1)
 		return (-1);
-	engine_init(&vars);
+	if (vars.save == 1)
+		createbmp(&vars);
+	else
+		engine_init(&vars);
 	return (1);
 }
 
@@ -363,9 +330,12 @@ int init_engine(t_vars *vars)
 	vars->cam.move_speed = 0.09;
 	vars->player.pos_x += 0.5;
 	vars->player.pos_y += 0.5;
-	mlx_get_screen_size(vars->mlx.mlx, &x, &y);
-	vars->screen.screen_h = (vars->screen.screen_h > y) ? y : vars->screen.screen_h;
-	vars->screen.screen_w = (vars->screen.screen_w > x) ? x : vars->screen.screen_w;
+	if (vars->save == 0)
+	{
+		mlx_get_screen_size(vars->mlx.mlx, &x, &y);
+		vars->screen.screen_h = (vars->screen.screen_h > y) ? y : vars->screen.screen_h;
+		vars->screen.screen_w = (vars->screen.screen_w > x) ? x : vars->screen.screen_w;
+	}
 	return (1);
 }
 

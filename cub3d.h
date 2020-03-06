@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/06 19:15:35 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/05 11:46:22 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/06 14:09:39 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,8 @@ typedef struct	s_vars
 	t_engine	eng;
 	t_sprite	spr;
 	t_nextframe	nframe;
-	int			image;
+	short		image;
+	short		save;
 }				t_vars;
 
 int	ft_puterror(char *s);
@@ -193,4 +194,15 @@ void wallsides(t_vars *vars);
 
 void swap(double *xp, double *yp);
 
+/*
+** Open image
+*/
+int file_north(t_vars *vars);
+int file_east(t_vars *vars);
+int file_south(t_vars *vars);
+int file_west(t_vars *vars);
+int file_sprite(t_vars *vars);
+
+
+int createbmp(t_vars *vars);
 #endif
