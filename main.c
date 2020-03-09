@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 13:41:15 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/09 17:38:56 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/09 17:57:04 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,10 @@ int	main(int argc, char **argv)
 		return (ft_puterror("Argument is not a .cub file."));
 	ret = parse_main(&vars, argv[1]);
 	if (ret == -1)
+	{
+		system ("leaks cub3D");
 		return (-1);
+	}
 	if (argc > 2 && ft_strncmp(argv[2], "--save", 7))
 		return (ft_puterror("Second argument is invalid."));
 	else if (argc > 2 && ft_strncmp(argv[2], "--save", 7) == 0)

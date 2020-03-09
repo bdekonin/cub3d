@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:26:42 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/09 17:49:13 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/09 17:58:26 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,10 @@ int parse_main(t_vars *vars, char *argv)
 		i = 0;
 		data.ret = get_next_line(data.fd, &data.line);
 		if (data.ret < 0)
+		{
+			parse_free(&data);
 			return (ft_puterror("parse_main | get_next_line failed."));
+		}
 		while (data.line[i] == ' ')
 			i++;
 		if (data.line[i] == 'R' && get_resolution(data.line, &data) == -1)
@@ -166,10 +169,6 @@ int parse_main(t_vars *vars, char *argv)
 			data.error = -1;
 		else if (data.line[i] == '0' || data.line[i] == '1')
 		{
-			// if (data.malloced[0] == 'Y' && data.malloced[1] == 'Y' &&
-			// data.malloced[2] == 'Y' && data.malloced[3] == 'Y' && data.malloced[4] == 'Y' &&
-			// data.malloced[5] == 'Y' && data.malloced[6] == 'Y' && data.floor >= 0 && data.ceiling >= 0 &&
-			// data.screen_x != -1 && data.screen_y != -1)
 			read_map(data.line, &data.map_width, &data.map_height, &data.sprite_count);
 			if (data.map_start == -1 && (ft_counter(data.line, '1') + ft_counter(data.line, '0') > 0))
 				data.map_start = data.count;
