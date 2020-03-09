@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 13:41:15 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/09 17:06:49 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/09 17:38:56 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	main(int argc, char **argv)
 	if (ret == -1)
 		return (-1);
 	if (argc > 2 && ft_strncmp(argv[2], "--save", 7))
-			return (ft_puterror("Second argument is invalid."));
+		return (ft_puterror("Second argument is invalid."));
 	else if (argc > 2 && ft_strncmp(argv[2], "--save", 7) == 0)
 		vars.save = 1;
 	initialize_rendering(&vars);
@@ -327,12 +327,12 @@ int initialize_rendering(t_vars *vars)
 	vars->cam.move_speed = 0.09;
 	vars->player.pos_x += 0.5;
 	vars->player.pos_y += 0.5;
-	// if (vars->save == 0)
-	// {
-	// 	mlx_get_screen_size(vars->mlx.mlx, &x, &y);
-	// 	vars->screen.screen_h = (vars->screen.screen_h > y) ? y : vars->screen.screen_h;
-	// 	vars->screen.screen_w = (vars->screen.screen_w > x) ? x : vars->screen.screen_w;
-	// }
+	if (vars->save == 0)
+	{
+		mlx_get_screen_size(vars->mlx.mlx, &x, &y);
+		vars->screen.screen_h = (vars->screen.screen_h > y) ? y : vars->screen.screen_h;
+		vars->screen.screen_w = (vars->screen.screen_w > x) ? x : vars->screen.screen_w;
+	}
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:26:42 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/09 17:23:02 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/09 17:49:13 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ static void copy_dir(t_vars *vars, t_data *data)
 
 static void copy_data(t_vars *vars, t_data *data)
 {
-	printf("check2\n");
 	vars->screen.screen_w = data->screen_x;
 	vars->screen.screen_h = data->screen_y;
 	vars->player.pos_x = data->spawn_pos_x;
@@ -167,6 +166,10 @@ int parse_main(t_vars *vars, char *argv)
 			data.error = -1;
 		else if (data.line[i] == '0' || data.line[i] == '1')
 		{
+			// if (data.malloced[0] == 'Y' && data.malloced[1] == 'Y' &&
+			// data.malloced[2] == 'Y' && data.malloced[3] == 'Y' && data.malloced[4] == 'Y' &&
+			// data.malloced[5] == 'Y' && data.malloced[6] == 'Y' && data.floor >= 0 && data.ceiling >= 0 &&
+			// data.screen_x != -1 && data.screen_y != -1)
 			read_map(data.line, &data.map_width, &data.map_height, &data.sprite_count);
 			if (data.map_start == -1 && (ft_counter(data.line, '1') + ft_counter(data.line, '0') > 0))
 				data.map_start = data.count;
@@ -186,7 +189,6 @@ int parse_main(t_vars *vars, char *argv)
 		return (parse_free(&data));
 	if (!check_path(&data, data.spawn_pos_y, data.spawn_pos_x, 0))
 	{
-	map(&data);
 		ft_puterror("flood fill failed\n");
 		return (parse_free(&data));
 	}

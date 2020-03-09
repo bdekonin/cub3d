@@ -6,7 +6,7 @@
 #    By: bdekonin <bdekonin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/03/06 18:06:17 by bdekonin       #+#    #+#                 #
-#    Updated: 2020/03/09 15:46:57 by bdekonin      ########   odam.nl          #
+#    Updated: 2020/03/09 17:33:31 by bdekonin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ SRC = main.c utils.c \
 	engine/keys/look.c
 
 OBJ = $(SRC:.c=.o)
-CC = gcc -Wall -Wextra -Werror 
+CC = gcc -Wall -Wextra -Werror
 FLAGS = -L. -lmlx -framework OpenGL -framework AppKit
 MLX = libmlx.dylib
 LIB = libft/libft.a
@@ -52,6 +52,7 @@ libmlx.dylib:
 $(NAME): $(OBJ) $(MLX)
 	@$(MAKE) -C libft bonus
 	@$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(LIB)
+	make clean
 	
 %.o: %.c
 	@gcc -Imlx -Iinc -Ilibft -c $< -o $@
