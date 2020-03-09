@@ -6,18 +6,55 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:26:42 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/06 13:21:52 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/09 17:23:02 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse_data.h"
 #include "../cub3d.h"
 
+void map(t_data *data)
+{
+	for (int y = 0; y < data->map_height; y++)
+	{
+		for(int loop = 0; loop < data->map_width; loop++)
+		{
+			if (data->spawn_pos_y == y && data->spawn_pos_x == loop)
+			{
+				printf("\033[0;31m");
+				printf("%c", data->spawn_dir);
+				printf("\033[0m");
+			}
+			else if (data->map[y][loop] == 1)
+			{
+				printf("\033[01;33m");
+				printf("%d", data->map[y][loop]);
+				printf("\033[0m");
+			}
+			else if (data->map[y][loop] == 8)
+			{
+				printf("\033[0;34m");
+				printf("%d", data->map[y][loop]);
+				printf("\033[0m");
+			}
+			else if (data->map[y][loop] == 7)
+			{
+				printf("\033[1;32m");
+				printf("%d", data->map[y][loop]);
+				printf("\033[0m");
+			}
+			else
+				printf("%d", data->map[y][loop]);
+		}
+		printf("\n");
+	}
+	printf("\n");
+}
+
 static void copy_dir(t_vars *vars, t_data *data)
 {
 	if (data->spawn_dir == 'N')
 	{
-		vars->player.dir_x = 0;
 		vars->player.dir_y = -1;
 		vars->cam.planeX = 0.66;
 		vars->cam.planeY = 0;
@@ -26,47 +63,44 @@ static void copy_dir(t_vars *vars, t_data *data)
 	{
 		vars->player.dir_x = 1;
 		vars->player.dir_y = 0;
-		vars->cam.planeX = 0;
-		vars->cam.planeY = -0.66;
+		vars->cam.planeY = 0.66;
 	}
 	else if (data->spawn_dir == 'S')
 	{
-		vars->player.dir_x = 1;
+		vars->player.dir_y = 1;
 		vars->cam.planeX = -0.66;
+		vars->cam.planeY = 0;
 	}
 	else if (data->spawn_dir == 'W')
 	{
 		vars->player.dir_x = -1;
 		vars->player.dir_y = 0;
-		vars->cam.planeX = 0;
-		vars->cam.planeY = -0.66;	
+		vars->cam.planeY = -0.66;
 	}
 }
 
 static void copy_data(t_vars *vars, t_data *data)
 {
+	printf("check2\n");
 	vars->screen.screen_w = data->screen_x;
 	vars->screen.screen_h = data->screen_y;
-
 	vars->player.pos_x = data->spawn_pos_x;
 	vars->player.pos_y = data->spawn_pos_y;
+	vars->cam.planeX = 0;
+	vars->player.dir_x = 0;
 	copy_dir(vars, data);
-
 	vars->map.map = data->map;
 	vars->map.map_w = data->map_width;
 	vars->map.map_h = data->map_height;
-
 	vars->cub.floor_color = data->floor[0] * 65536 +
 	data->floor[1] * 256 + data->floor[2];
 	vars->cub.ceiling_color = data->ceiling[0] * 65536 +
 	data->ceiling[1] * 256 + data->ceiling[2];
-	
 	vars->cub.north = data->north_path;
 	vars->cub.east = data->east_path;
 	vars->cub.south = data->south_path;
 	vars->cub.west = data->west_path;
 	vars->cub.sprite = data->sprite_path;
-
 	vars->spr.sprite = data->sprite;
 	vars->spr.sprite_count = data->sprite_count;
 }
@@ -77,7 +111,7 @@ int parse_main(t_vars *vars, char *argv)
 	int i = 0;
 	data.fd = open(argv, O_RDONLY);
 	if (data.fd < 0)
-		return (0);
+		return (ft_puterror("Argument not found."));
 	parse_init(&data);
 	while (data.ret > 0 && data.error != -1)
 	{
@@ -134,7 +168,7 @@ int parse_main(t_vars *vars, char *argv)
 		else if (data.line[i] == '0' || data.line[i] == '1')
 		{
 			read_map(data.line, &data.map_width, &data.map_height, &data.sprite_count);
-			if (data.map_start == -1)
+			if (data.map_start == -1 && (ft_counter(data.line, '1') + ft_counter(data.line, '0') > 0))
 				data.map_start = data.count;
 		}
 		free(data.line);
@@ -152,7 +186,8 @@ int parse_main(t_vars *vars, char *argv)
 		return (parse_free(&data));
 	if (!check_path(&data, data.spawn_pos_y, data.spawn_pos_x, 0))
 	{
-		ft_puterror("invalid map.\n");
+	map(&data);
+		ft_puterror("flood fill failed\n");
 		return (parse_free(&data));
 	}
 	transfer_map(&data);

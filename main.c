@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 13:41:15 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/06 17:28:33 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/09 17:06:49 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 #include <math.h>
 #include <stdio.h>
 
-int init_engine(t_vars *vars);
-int engine_init(t_vars *vars);
+int initialize_rendering(t_vars *vars);
+int engine(t_vars *vars);
 
 int create_img(t_vars *vars)
 {
@@ -84,25 +84,28 @@ int	main(int argc, char **argv)
 	t_vars		vars;
 	int			ret;
 	char		*p;
+
 	if (argc < 2)
 		return (ft_puterror("Not enough arguments."));
+	if (argc > 3)
+		return (ft_puterror("Too many arguments."));
 	p = ft_strrchr(argv[1], '.');
-	if (ft_strncmp(p, ".cub", 10) != 0)
+	if (!p || ft_strncmp(p, ".cub", 10) != 0)
 		return (ft_puterror("Argument is not a .cub file."));
 	ret = parse_main(&vars, argv[1]);
 	if (ret == -1)
 		return (-1);
-	else if (ret == 0)
-		return (ft_puterror("Argument not found."));
-	if (argc > 2 && ft_strncmp(argv[2], "--save", 7) == 0)
+	if (argc > 2 && ft_strncmp(argv[2], "--save", 7))
+			return (ft_puterror("Second argument is invalid."));
+	else if (argc > 2 && ft_strncmp(argv[2], "--save", 7) == 0)
 		vars.save = 1;
-	init_engine(&vars);
+	initialize_rendering(&vars);
 	if (create_img(&vars) == -1)
 		return (-1);
 	if (vars.save == 1)
 		createbmp(&vars);
 	else
-		engine_init(&vars);
+		engine(&vars);
 	return (1);
 }
 
@@ -145,10 +148,8 @@ void renderframe(t_vars *vars)
 			vars->eng.step_y = 1;
 			vars->eng.side_dist_y = (vars->map.pos_y + 1.0 - vars->player.pos_y) * vars->eng.delta_dist_y;
 		}
-		//perfom DDA
 		while (vars->eng.hit == 0)
 		{
-			//jump to next map square
 			if (vars->eng.side_dist_x < vars->eng.side_dist_y)
 			{
 				vars->eng.side_dist_x += vars->eng.delta_dist_x;
@@ -161,11 +162,9 @@ void renderframe(t_vars *vars)
 				vars->map.pos_y += vars->eng.step_y;
 				vars->eng.side = 1;
 			}
-			//check if array vars->eng.hit wall
 			if (vars->map.map[vars->map.pos_y][vars->map.pos_x] > 0 && vars->map.map[vars->map.pos_y][vars->map.pos_x] != 2)
 				vars->eng.hit = 1;
 		}
-		
 		wallsides(vars);
 			if (vars->tex.w_tex == 'N')
 			{
@@ -292,7 +291,6 @@ void renderframe(t_vars *vars)
 int testing(t_vars *vars)
 {
 	renderframe(vars);
-	// map(vars);
 	if (vars->key.esc == 1)
 		close_win(vars);
 	if (vars->key.w == 1)
@@ -320,26 +318,25 @@ int testing(t_vars *vars)
 	return (1);
 }
 
-int init_engine(t_vars *vars)
+int initialize_rendering(t_vars *vars)
 {
 	int x;
 	int y;
-
 	init_key(vars);
 	vars->cam.rot_speed = 0.05;
 	vars->cam.move_speed = 0.09;
 	vars->player.pos_x += 0.5;
 	vars->player.pos_y += 0.5;
-	if (vars->save == 0)
-	{
-		mlx_get_screen_size(vars->mlx.mlx, &x, &y);
-		vars->screen.screen_h = (vars->screen.screen_h > y) ? y : vars->screen.screen_h;
-		vars->screen.screen_w = (vars->screen.screen_w > x) ? x : vars->screen.screen_w;
-	}
+	// if (vars->save == 0)
+	// {
+	// 	mlx_get_screen_size(vars->mlx.mlx, &x, &y);
+	// 	vars->screen.screen_h = (vars->screen.screen_h > y) ? y : vars->screen.screen_h;
+	// 	vars->screen.screen_w = (vars->screen.screen_w > x) ? x : vars->screen.screen_w;
+	// }
 	return (1);
 }
 
-int engine_init(t_vars *vars)
+int engine(t_vars *vars)
 {
 	mlx_loop_hook(vars->mlx.mlx, testing, vars);
 	mlx_hook(vars->mlx.mlx_win, 2, (1L << 0), key_press, vars);
