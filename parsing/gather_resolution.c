@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 16:20:37 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/04 15:49:44 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/09 21:00:49 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ static int		read_resolution(char *line, int *x, int *y)
 
 int				get_resolution(char *line, t_data *data)
 {
+	if (ft_strsearch(line, "R 0123456789") == 0)
+	{
+		return (ft_puterror("get_resolution | invalid characters."));
+	}
 	if (data->screen_x > 0 && data->screen_y > 0)
 	{
 		return (ft_puterror("get_resolution | multiple elements found."));

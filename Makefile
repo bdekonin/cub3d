@@ -6,7 +6,7 @@
 #    By: bdekonin <bdekonin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/03/06 18:06:17 by bdekonin       #+#    #+#                 #
-#    Updated: 2020/03/09 17:33:31 by bdekonin      ########   odam.nl          #
+#    Updated: 2020/03/10 14:13:59 by bdekonin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ SRC = main.c utils.c \
 	parsing/gather_sprite.c \
 	engine/render/create_image.c \
 	engine/bmp/createbmp.c \
-	engine/keys/look.c
+	engine/keys/look.c \
+	parsing/sortsprite.c
 
 OBJ = $(SRC:.c=.o)
 CC = gcc -Wall -Wextra -Werror

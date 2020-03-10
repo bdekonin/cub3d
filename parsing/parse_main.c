@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:26:42 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/09 17:58:26 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/10 14:22:47 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,8 +160,8 @@ int parse_main(t_vars *vars, char *argv)
 			i++;
 			while (data.line[i] == ' ')
 				i++;
-			if (data.line[i] == 'E')
-				get_west(data.line, &data);
+			if (data.line[i] == 'E' && get_west(data.line, &data) == -1)
+				data.error = -1;
 		}
 		else if (data.line[i] == 'C' && get_ceiling(data.line, &data) == -1)
 			data.error = -1;

@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/06 19:15:35 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/06 17:29:13 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/10 15:22:21 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ typedef struct	s_key
 	int			esc;
 	int			l_arr;
 	int			r_arr;
-	int			space;
-	int			n;
 }				t_key;
 
 typedef struct	s_camera
@@ -208,6 +206,17 @@ int file_south(t_vars *vars);
 int file_west(t_vars *vars);
 int file_sprite(t_vars *vars);
 
-
+/*
+** Sorting
+*/
+void swap(double *xp, double *yp);
 int createbmp(t_vars *vars);
+int		ft_strsearch(char *line, char *str);
 #endif
+
+/*
+** Sometimes mlx can leak. I have not found a solution for this.
+** https://developer.apple.com/documentation/swift/contiguousarray
+** This is how the leak is called.
+** <_ContiguousArrayStorage<UnsafeMutableRawPointer?>
+*/

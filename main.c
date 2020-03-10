@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 13:41:15 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/09 17:57:04 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/10 16:42:39 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,15 @@
 int initialize_rendering(t_vars *vars);
 int engine(t_vars *vars);
 
-int create_img(t_vars *vars)
+int create_img(t_vars *vars, char *filename)
 {
+	char *ptr;
+	ptr = ft_strjoin("cub3d | ", filename);
+	if (!ptr)
+		return (ft_puterror("Malloc failed."));
 	vars->mlx.mlx = mlx_init();
 	if (vars->save == 0)
-    	vars->mlx.mlx_win = mlx_new_window(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h, "Cub3d!");
+		vars->mlx.mlx_win = mlx_new_window(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h, ptr);
     vars->mlx.img = mlx_new_image(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h);
     vars->mlx.addr = mlx_get_data_addr(vars->mlx.img, &vars->mlx.bits_pixel, &vars->mlx.line_length,
                                  &vars->mlx.endian);
@@ -30,7 +34,7 @@ int create_img(t_vars *vars)
     vars->nframe.img = mlx_new_image(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h);
     vars->nframe.addr = mlx_get_data_addr(vars->nframe.img, &vars->nframe.bits_pixel, &vars->nframe.line_length,
                                  &vars->nframe.endian);
-	
+	free(ptr);
 	if (file_north(vars) == -1)
 		return (-1);
 	if (file_east(vars) == -1)
@@ -92,24 +96,22 @@ int	main(int argc, char **argv)
 	p = ft_strrchr(argv[1], '.');
 	if (!p || ft_strncmp(p, ".cub", 10) != 0)
 		return (ft_puterror("Argument is not a .cub file."));
-	ret = parse_main(&vars, argv[1]);
-	if (ret == -1)
-	{
-		system ("leaks cub3D");
-		return (-1);
-	}
 	if (argc > 2 && ft_strncmp(argv[2], "--save", 7))
 		return (ft_puterror("Second argument is invalid."));
 	else if (argc > 2 && ft_strncmp(argv[2], "--save", 7) == 0)
 		vars.save = 1;
+	ret = parse_main(&vars, argv[1]);
+	if (ret == -1)
+		exit(1);
 	initialize_rendering(&vars);
-	if (create_img(&vars) == -1)
-		return (-1);
+	if (create_img(&vars, argv[1]) == -1)
+		exit(1);
 	if (vars.save == 1)
 		createbmp(&vars);
 	else
 		engine(&vars);
-	return (1);
+	system("leaks cub3D");
+	exit(0);
 }
 
 void renderframe(t_vars *vars)

@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/21 14:31:59 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/02/23 09:38:42 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/10 15:37:54 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 int		close_win(t_vars *vars)
 {
 	mlx_destroy_window(vars->mlx.mlx, vars->mlx.mlx_win);
+	mlx_destroy_image(vars->mlx.mlx, vars->mlx.img);
+	mlx_destroy_image(vars->mlx.mlx, vars->nframe.img);
+	// system("leaks cub3D");
 	exit(0);
 	return (1);
 }
@@ -35,10 +38,6 @@ int		key_press(int keycode, t_vars *vars)
 		vars->key.l_arr = 1;
 	else if (keycode == 124)
 		vars->key.r_arr = 1;
-	else if (keycode == 49)
-		vars->key.space = 1;
-	else if (keycode == 45)
-		vars->key.n = 1;
 	return (1);
 }
 
@@ -58,10 +57,6 @@ int		key_release(int keycode, t_vars *vars)
 		vars->key.l_arr = 0;
 	else if (keycode == 124)
 		vars->key.r_arr = 0;
-	else if (keycode == 49)
-		vars->key.space = 0;
-	else if (keycode == 45)
-		vars->key.n = 0;
 	return (1);
 }
 
@@ -74,6 +69,4 @@ void	init_key(t_vars *vars)
 	vars->key.d = 0;
 	vars->key.l_arr = 0;
 	vars->key.r_arr = 0;
-	vars->key.space = 0;
-	vars->key.n = 0;
 }

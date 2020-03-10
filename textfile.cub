@@ -1,14 +1,16 @@
-R 800 800
-NO textures/file1.xpm
-EA textures/file2.xpm
+R 800 800    
+NO textures/redbrick.png
+EA textures/bluestone.png
 SO textures/file3.xpm
 WE textures/wood.png
+S textures/barrel.png
 
 C 135,206,235
 F 168, 119, 90
-                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                
 11111111
-10010001
 10200001
-1100N001
+10000001
+10N00001
+10000001
 11111111

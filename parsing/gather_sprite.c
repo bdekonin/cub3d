@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:14:22 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/04 16:02:00 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/10 15:09:54 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static double			*fill_line_sprite(int width)
 	return (array);
 }
 
+
+
 int make_sprite(t_data *data)
 {
 	int i;
@@ -42,8 +44,9 @@ int make_sprite(t_data *data)
 		data->sprite[i] = fill_line_sprite(3);
 		if (!data->sprite[i])
 		{
-			free(data->map);
-			return (free_sprites(data, i));
+			free_sprites(data, i + 1);
+			free(data->sprite);
+			return (-1);
 		}
 		i++;
 	}
@@ -61,50 +64,6 @@ void save_sprite(t_data *data, int y, int x)
 	i++;
 }
 
-void swap(double *xp, double *yp)  
-{  
-	double temp;
-	
-	temp = *xp;
-	*xp = *yp;
-	*yp = temp;
-}
-
-void sortsprite_init(t_data *data)
-{
-	for (int i = 0; i < data->sprite_count - 1; i++)
-	{
-		for (int i = 0; i < data->sprite_count - 1; i++)
-		{
-			if (data->sprite[i][2] < data->sprite[i + 1][2])
-			{
-				swap(&data->sprite[i][0], &data->sprite[i + 1][0]);
-				swap(&data->sprite[i][1], &data->sprite[i + 1][1]);
-				swap(&data->sprite[i][2], &data->sprite[i + 1][2]);
-			}
-		}
-	}
-}
-
-void calculate_dist(t_data *data)
-{
-	int i;
-	int y;
-	int x;
-
-	i = 0;
-	while (i < data->sprite_count)
-	{
-		x = data->spawn_pos_x - data->sprite[i][1];
-		x *= (x < 0) ? -1 : 1;
-		y = data->spawn_pos_y - data->sprite[i][0];
-		y *= (y < 0) ? -1 : 1;
-		data->sprite[i][2] = sqrt(y + x);
-		i++;
-	}
-	sortsprite_init(data);
-}
-
 int		free_sprites(t_data *data, int i)
 {
 	while (i > 0)
@@ -112,5 +71,6 @@ int		free_sprites(t_data *data, int i)
 		i--;
 		free(data->sprite[i]);
 	}
-	return (ft_puterror("Malloc has failed for sprites."));
+	ft_puterror("Malloc has failed for sprites.");
+	return (-1);
 }
