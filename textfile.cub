@@ -3,7 +3,7 @@ EA ./textures/bluestone.png
 C   1,0,255
 F255,0,0      
 
-R 10000 100000
+R 800 800
 NO       ./textures/redbrick.png
 WE       ./textures/mo ssy.png
 S ./textures/barrel.png                            

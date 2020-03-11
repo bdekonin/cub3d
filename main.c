@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 13:41:15 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/11 18:13:26 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/11 18:39:02 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ void renderframe(t_vars *vars)
 		calculatedraw(vars);
 
 		//texturing calculations
-		int texNum = vars->map.map[vars->map.pos_y][vars->map.pos_x]; //1 subtracted from it so that texture 0 can be used!
+		// // // int texNum = vars->map.map[vars->map.pos_y][vars->map.pos_x]; //1 subtracted from it so that texture 0 can be used!
 			double wallX;
 			if (vars->eng.side == 0)
 				wallX = vars->player.pos_y + vars->eng.perp_wall_dist * vars->eng.raydir_y;
@@ -175,29 +175,10 @@ void renderframe(t_vars *vars)
 
 
 		// How much to increase the texture coordinate per screen pixel
-    	double step = 1.0 * vars->spr.texheight / vars->ren.lineheight;
-		double texPos = (vars->ren.drawstart - vars->screen.screen_h / 2 + vars->ren.lineheight / 2) * step;
+    	vars->ren.step = 1.0 * vars->spr.texheight / vars->ren.lineheight;
+		vars->ren.tex_pos = (vars->ren.drawstart - vars->screen.screen_h / 2 + vars->ren.lineheight / 2) * vars->ren.step;
 
-		if (vars->map.map[(int)vars->player.pos_y][(int)vars->player.pos_x] == 3)
-			vars->map.map[(int)vars->player.pos_y][(int)vars->player.pos_x] = 0;
-			
-		for(int y = vars->ren.drawstart; y<vars->ren.drawend; y++)
-		{
-			if (texNum != 2)
-			{
-				vars->ren.tex_y = (int)texPos & (vars->spr.texheight - 1);
-				texPos += step;
-				if (vars->tex.w_tex == 'N')
-					vars->color = *(unsigned int*)(vars->tex.addr[0] + (vars->ren.tex_y * vars->tex.line_length[0] + vars->ren.tex_x * (vars->tex.bits_pixel[0] / 8)));
-				else if (vars->tex.w_tex == 'E')
-					vars->color = *(unsigned int*)(vars->tex.addr[1] + (vars->ren.tex_y * vars->tex.line_length[1] + vars->ren.tex_x * (vars->tex.bits_pixel[1] / 8)));
-				else if (vars->tex.w_tex == 'S')
-					vars->color = *(unsigned int*)(vars->tex.addr[2] + (vars->ren.tex_y * vars->tex.line_length[2] + vars->ren.tex_x * (vars->tex.bits_pixel[2] / 8)));
-				else if (vars->tex.w_tex == 'W')
-					vars->color = *(unsigned int*)(vars->tex.addr[3] + (vars->ren.tex_y * vars->tex.line_length[3] + vars->ren.tex_x * (vars->tex.bits_pixel[3] / 8)));
-				my_mlx_pixel_put(vars, x, y, vars->color);
-			}
-		}
+		draw_wall(vars, x);
 		vars->spr.zbuffer[x] = vars->eng.perp_wall_dist;
 		fill_background(x, vars->ren.drawstart, vars->ren.drawend, vars);
 	}

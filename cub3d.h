@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/06 19:15:35 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/11 18:12:58 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/11 18:28:13 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,9 @@ typedef struct s_render
 	int 		lineheight;
 	int			drawstart;
 	int			drawend;
+	double		step;
+	double		tex_pos;
+	// int			tex_num;
 }				t_render;
 
 typedef struct	s_vars
@@ -196,6 +199,7 @@ int parse_main(t_vars *vars, char *argv);
 void renderframe(t_vars *vars);
 void senddir(t_vars *vars);
 void calculatedraw(t_vars *vars);
+void draw_wall(t_vars *vars, int x);
 
 /*
 **	Coloring

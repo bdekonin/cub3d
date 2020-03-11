@@ -6,7 +6,7 @@
 #    By: bdekonin <bdekonin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/03/06 18:06:17 by bdekonin       #+#    #+#                 #
-#    Updated: 2020/03/11 18:00:20 by bdekonin      ########   odam.nl          #
+#    Updated: 2020/03/11 18:29:01 by bdekonin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,9 @@ SRC = main.c utils.c \
 	engine/keys/look.c \
 	parsing/sortsprite.c \
 	engine/sprite/sprite.c \
-	engine/render/rayhit.c
+	engine/render/rayhit.c \
+	engine/render/calculatedraw.c \
+	engine/render/draw_wall.c
 
 OBJ = $(SRC:.c=.o)
 CC = gcc -Wall -Wextra -Werror
