@@ -6,7 +6,7 @@
 #    By: bdekonin <bdekonin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/03/06 18:06:17 by bdekonin       #+#    #+#                 #
-#    Updated: 2020/03/10 14:13:59 by bdekonin      ########   odam.nl          #
+#    Updated: 2020/03/11 11:07:13 by bdekonin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,8 +67,10 @@ clean:
 	@/bin/rm -f $(OBJ)
 	@/bin/rm -f *~
 	@/bin/rm -f .DS_Store
+	@cd libft && make clean
 
 fclean: clean
 	@/bin/rm -f $(NAME)
+	@cd libft && make fclean
 	
 re: fclean all
