@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:26:42 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/10 19:31:36 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/11 17:47:55 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,24 +128,18 @@ int parse_main(t_vars *vars, char *argv)
 		else if (data.line[i] == 'N')
 		{
 			i++;
-			while (data.line[i] == ' ')
-				i++;
 			if (data.line[i] == 'O' && get_north(data.line, &data) == -1)
 				data.error = -1;
 		}
 		else if (data.line[i] == 'E')
 		{
 			i++;
-			while (data.line[i] == ' ')
-				i++;
 			if (data.line[i] == 'A' && get_east(data.line, &data) == -1)
 				data.error = -1;
 		}
 		else if (data.line[i] == 'S')
 		{
 			i++;
-			while (data.line[i] == ' ')
-				i++;
 			if (data.line[i] == 'O')
 			{
 				if (get_south(data.line, &data) == -1)			
@@ -158,8 +152,6 @@ int parse_main(t_vars *vars, char *argv)
 		else if (data.line[i] == 'W')
 		{
 			i++;
-			while (data.line[i] == ' ')
-				i++;
 			if (data.line[i] == 'E' && get_west(data.line, &data) == -1)
 				data.error = -1;
 		}

@@ -6,7 +6,7 @@
 #    By: bdekonin <bdekonin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/03/06 18:06:17 by bdekonin       #+#    #+#                 #
-#    Updated: 2020/03/11 11:07:13 by bdekonin      ########   odam.nl          #
+#    Updated: 2020/03/11 18:00:20 by bdekonin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,9 @@ SRC = main.c utils.c \
 	engine/render/create_image.c \
 	engine/bmp/createbmp.c \
 	engine/keys/look.c \
-	parsing/sortsprite.c
+	parsing/sortsprite.c \
+	engine/sprite/sprite.c \
+	engine/render/rayhit.c
 
 OBJ = $(SRC:.c=.o)
 CC = gcc -Wall -Wextra -Werror
@@ -67,10 +69,10 @@ clean:
 	@/bin/rm -f $(OBJ)
 	@/bin/rm -f *~
 	@/bin/rm -f .DS_Store
-	@cd libft && make clean
+	# @cd libft && make clean
 
 fclean: clean
 	@/bin/rm -f $(NAME)
-	@cd libft && make fclean
+	# @cd libft && make fclean
 	
 re: fclean all

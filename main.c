@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 13:41:15 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/11 11:56:23 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/11 18:13:26 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,44 @@
 int initialize_rendering(t_vars *vars);
 int engine(t_vars *vars);
 
+static int createmlx(t_vars *vars, char *filename)
+{
+	vars->mlx.mlx = mlx_init();
+	if (!vars->mlx.mlx)
+		return (ft_puterror("Failed creating mlx pointer."));
+	if (vars->save == 0)
+		vars->mlx.mlx_win = mlx_new_window(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h, filename);
+	if (!vars->mlx.mlx_win)
+		return (ft_puterror("Failed creating mlx window."));
+    vars->mlx.img = mlx_new_image(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h);
+	if (!vars->mlx.img)
+		return (ft_puterror("Failed creating mlx image."));
+    vars->mlx.addr = mlx_get_data_addr(vars->mlx.img, &vars->mlx.bits_pixel, &vars->mlx.line_length,
+                                 &vars->mlx.endian);
+	if (!vars->mlx.addr)
+		return (ft_puterror("Failed getting mlx address."));
+    vars->nframe.img = mlx_new_image(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h);
+	if (!vars->nframe.img)
+		return (ft_puterror("Failed creating mlx image."));
+    vars->nframe.addr = mlx_get_data_addr(vars->nframe.img, &vars->nframe.bits_pixel, &vars->nframe.line_length,
+                                 &vars->nframe.endian);
+	if (!vars->nframe.addr)
+		return (ft_puterror("Failed getting mlx address."));
+	return (1);
+}
+
 int create_img(t_vars *vars, char *filename)
 {
 	char *ptr;
 	ptr = ft_strjoin("cub3d | ", filename);
 	if (!ptr)
 		return (ft_puterror("Malloc failed."));
-	vars->mlx.mlx = mlx_init();
-	if (vars->save == 0)
-		vars->mlx.mlx_win = mlx_new_window(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h, ptr);
-    vars->mlx.img = mlx_new_image(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h);
-    vars->mlx.addr = mlx_get_data_addr(vars->mlx.img, &vars->mlx.bits_pixel, &vars->mlx.line_length,
-                                 &vars->mlx.endian);
-
-    vars->nframe.img = mlx_new_image(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h);
-    vars->nframe.addr = mlx_get_data_addr(vars->nframe.img, &vars->nframe.bits_pixel, &vars->nframe.line_length,
-                                 &vars->nframe.endian);
+	if (!createmlx(vars, filename))
+		return (-1);
 	free(ptr);
+	vars->spr.zbuffer = malloc(sizeof(double) * vars->screen.screen_w);
+	if (!vars->spr.zbuffer)
+		return (ft_puterror("Malloc has failed"));
 	if (file_north(vars) == -1)
 		return (-1);
 	if (file_east(vars) == -1)
@@ -110,16 +131,17 @@ int	main(int argc, char **argv)
 		createbmp(&vars);
 	else
 		engine(&vars);
-	system("leaks cub3D");
 	exit(0);
 }
 
 void renderframe(t_vars *vars)
 {
-	int texWidth = 64;
-	int	texHeight = 64;
-	double ZBuffer[vars->screen.screen_w];
-	
+	vars->spr.texwidth = 64;
+	vars->spr.texheight = 64;
+	size_t i;
+
+	i = 0;
+
 	for(int x = 0; x < vars->screen.screen_w; x++)
 	{
 		vars->cam.camera_x = 2 * x / (double)vars->screen.screen_w - 1;
@@ -132,76 +154,9 @@ void renderframe(t_vars *vars)
 		vars->eng.delta_dist_y = fabs(1 / vars->eng.raydir_y);
 
 		vars->eng.hit = 0;
-
-		if (vars->eng.raydir_x < 0)
-		{
-			vars->eng.step_x = -1;
-			vars->eng.side_dist_x = (vars->player.pos_x - vars->map.pos_x) * vars->eng.delta_dist_x;
-		}
-		else
-		{
-			vars->eng.step_x = 1;
-			vars->eng.side_dist_x = (vars->map.pos_x + 1.0 - vars->player.pos_x) * vars->eng.delta_dist_x;
-		}
-		if (vars->eng.raydir_y < 0)
-		{
-			vars->eng.step_y = -1;
-			vars->eng.side_dist_y = (vars->player.pos_y - vars->map.pos_y) * vars->eng.delta_dist_y;
-		}
-		else
-		{
-			vars->eng.step_y = 1;
-			vars->eng.side_dist_y = (vars->map.pos_y + 1.0 - vars->player.pos_y) * vars->eng.delta_dist_y;
-		}
-		while (vars->eng.hit == 0)
-		{
-			if (vars->eng.side_dist_x < vars->eng.side_dist_y)
-			{
-				vars->eng.side_dist_x += vars->eng.delta_dist_x;
-				vars->map.pos_x += vars->eng.step_x;
-				vars->eng.side = 0;
-			}
-			else
-			{
-				vars->eng.side_dist_y += vars->eng.delta_dist_y;
-				vars->map.pos_y += vars->eng.step_y;
-				vars->eng.side = 1;
-			}
-			if (vars->map.map[vars->map.pos_y][vars->map.pos_x] > 0 && vars->map.map[vars->map.pos_y][vars->map.pos_x] != 2)
-				vars->eng.hit = 1;
-		}
+		senddir(vars);
 		wallsides(vars);
-			if (vars->tex.w_tex == 'N')
-			{
-				texWidth = vars->tex.w[0];
-				texHeight = vars->tex.h[0];
-			}
-			else if (vars->tex.w_tex == 'E')
-			{
-				texWidth = vars->tex.w[1];
-				texHeight = vars->tex.h[1];
-			}
-			else if (vars->tex.w_tex == 'S')
-			{
-				texWidth = vars->tex.w[2];
-				texHeight = vars->tex.h[2];
-			}
-			else if (vars->tex.w_tex == 'W')
-			{
-				texWidth = vars->tex.w[3];
-				texHeight = vars->tex.h[3];
-			}
-
-		// calcuate line height
-		int lineHeight = (int)vars->screen.screen_h / vars->eng.perp_wall_dist;
-
-		//calculate lowest heighest pixel
-		int drawStart = -lineHeight / 2 + vars->screen.screen_h / 2;
-		if (drawStart < 0)
-			drawStart = 0;
-		int drawEnd = lineHeight / 2 + vars->screen.screen_h / 2; 
-		if (drawEnd >= vars->screen.screen_h)
-			drawEnd = vars->screen.screen_h - 1;
+		calculatedraw(vars);
 
 		//texturing calculations
 		int texNum = vars->map.map[vars->map.pos_y][vars->map.pos_x]; //1 subtracted from it so that texture 0 can be used!
@@ -212,83 +167,44 @@ void renderframe(t_vars *vars)
 				wallX = vars->player.pos_x + vars->eng.perp_wall_dist * vars->eng.raydir_x;
 			wallX -= floor((wallX));
 
-		int texX = (int)(wallX * (double)(texWidth));
+		vars->ren.tex_x = (int)(wallX * (double)(vars->spr.texwidth));
 		if (vars->eng.side == 0 && vars->eng.raydir_x > 0)
-			texX = texWidth - texX - 1;
+			vars->ren.tex_x = vars->spr.texwidth - vars->ren.tex_x - 1;
 		if (vars->eng.side == 1 && vars->eng.raydir_y < 0)
-			texX = texWidth - texX - 1;
+			vars->ren.tex_x = vars->spr.texwidth - vars->ren.tex_x - 1;
 
 
 		// How much to increase the texture coordinate per screen pixel
-    	double step = 1.0 * texHeight / lineHeight;
-		double texPos = (drawStart - vars->screen.screen_h / 2 + lineHeight / 2) * step;
+    	double step = 1.0 * vars->spr.texheight / vars->ren.lineheight;
+		double texPos = (vars->ren.drawstart - vars->screen.screen_h / 2 + vars->ren.lineheight / 2) * step;
 
 		if (vars->map.map[(int)vars->player.pos_y][(int)vars->player.pos_x] == 3)
 			vars->map.map[(int)vars->player.pos_y][(int)vars->player.pos_x] = 0;
 			
-		for(int y = drawStart; y<drawEnd; y++)
+		for(int y = vars->ren.drawstart; y<vars->ren.drawend; y++)
 		{
 			if (texNum != 2)
 			{
-				unsigned int color;
-				int texY = (int)texPos & (texHeight - 1);
+				vars->ren.tex_y = (int)texPos & (vars->spr.texheight - 1);
 				texPos += step;
 				if (vars->tex.w_tex == 'N')
-					color = *(unsigned int*)(vars->tex.addr[0] + (texY * vars->tex.line_length[0] + texX * (vars->tex.bits_pixel[0] / 8)));
+					vars->color = *(unsigned int*)(vars->tex.addr[0] + (vars->ren.tex_y * vars->tex.line_length[0] + vars->ren.tex_x * (vars->tex.bits_pixel[0] / 8)));
 				else if (vars->tex.w_tex == 'E')
-					color = *(unsigned int*)(vars->tex.addr[1] + (texY * vars->tex.line_length[1] + texX * (vars->tex.bits_pixel[1] / 8)));
+					vars->color = *(unsigned int*)(vars->tex.addr[1] + (vars->ren.tex_y * vars->tex.line_length[1] + vars->ren.tex_x * (vars->tex.bits_pixel[1] / 8)));
 				else if (vars->tex.w_tex == 'S')
-					color = *(unsigned int*)(vars->tex.addr[2] + (texY * vars->tex.line_length[2] + texX * (vars->tex.bits_pixel[2] / 8)));
+					vars->color = *(unsigned int*)(vars->tex.addr[2] + (vars->ren.tex_y * vars->tex.line_length[2] + vars->ren.tex_x * (vars->tex.bits_pixel[2] / 8)));
 				else if (vars->tex.w_tex == 'W')
-					color = *(unsigned int*)(vars->tex.addr[3] + (texY * vars->tex.line_length[3] + texX * (vars->tex.bits_pixel[3] / 8)));
-				my_mlx_pixel_put(vars, x, y, color);
+					vars->color = *(unsigned int*)(vars->tex.addr[3] + (vars->ren.tex_y * vars->tex.line_length[3] + vars->ren.tex_x * (vars->tex.bits_pixel[3] / 8)));
+				my_mlx_pixel_put(vars, x, y, vars->color);
 			}
 		}
-		ZBuffer[x] = vars->eng.perp_wall_dist;
-		fill_background(x, drawStart, drawEnd, vars);
+		vars->spr.zbuffer[x] = vars->eng.perp_wall_dist;
+		fill_background(x, vars->ren.drawstart, vars->ren.drawend, vars);
 	}
-	for(int i = 0; i < vars->spr.sprite_count; i++)
+	while (i < vars->spr.sprite_count)
 	{
-		double spriteY = vars->spr.sprite[i][0] - vars->player.pos_y;
-		double spriteX = vars->spr.sprite[i][1] - vars->player.pos_x;
-
-		double invDet = 1.0 / (vars->cam.planeX * vars->player.dir_y - vars->player.dir_x * vars->cam.planeY);
-		double transformX = invDet * (vars->player.dir_y * spriteX - vars->player.dir_x * spriteY);
-		double transformY = invDet * (-vars->cam.planeY * spriteX + vars->cam.planeX * spriteY);
-
-		int spriteScreenX = (int)(vars->screen.screen_w / 2) * (1 + transformX / transformY);
-		
-		int spriteHeight = fabs((int)vars->screen.screen_h / transformY);
-
-		int drawStartY = -spriteHeight / 2 + vars->screen.screen_h / 2;
-		if (drawStartY < 0)
-			drawStartY = 0;
-		int drawEndY = spriteHeight / 2 + vars->screen.screen_h / 2;
-		if (drawEndY >= vars->screen.screen_h)
-			drawEndY = vars->screen.screen_h - 1;
-
-		int spriteWidth = fabs((int)vars->screen.screen_h / transformY);
-		int drawStartX = -spriteWidth / 2 + spriteScreenX;
-		if (drawStartX < 0)
-			drawStartX = 0;
-		int drawEndX = spriteWidth / 2 + spriteScreenX;
-		if (drawEndX >= vars->screen.screen_w)
-			drawEndX = vars->screen.screen_w - 1;
-		
-		for(int stripe = drawStartX; stripe < drawEndX; stripe++)
-		{
-			unsigned int color;
-			int texX = (256 *(stripe - (-spriteWidth / 2 + spriteScreenX)) * vars->tex.w[4] / spriteWidth) / 256;
-			if (transformY > 0 && stripe > 0 && stripe < vars->screen.screen_w && transformY < ZBuffer[stripe])
-			for(int y = drawStartY; y < drawEndY; y++)
-			{
-				int d = y * 256 - vars->screen.screen_h * 128 + spriteHeight * 128;
-				int texY = (d * vars->tex.h[4]) / spriteHeight / 256;
-				color = *(unsigned int*)(vars->tex.addr[4] + (texY * vars->tex.line_length[4] + texX * (vars->tex.bits_pixel[4] / 8)));
-				if ((color & 0x00FFFFFF) != 0)
-					my_mlx_pixel_put(vars, stripe, y, color);
-			}
-		}
+		sprite(vars, i);
+		i++;
 	}
 	calculate_dist_one(vars);
 }

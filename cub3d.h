@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/06 19:15:35 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/10 16:44:24 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/11 18:12:58 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,25 +139,49 @@ typedef struct s_sprite
 {
 	double		**sprite;
 	int			sprite_count;
+	double		*zbuffer;
+	int			texwidth;
+	int			texheight;
+	double		sprite_x;
+	double		sprite_y;
+	double		invdet;
+	double		transform_x;
+	double		transform_y;
+	int			spritescreenx;
+	int			spriteheight;
+	int			drawstart_y;
+	int			drawstart_x;
+	int			spritewidth;
+	int			drawend_y;
+	int			drawend_x;
 }				t_sprite;
 
-
+typedef struct s_render
+{
+	int 		tex_x;
+	int 		tex_y;
+	int 		lineheight;
+	int			drawstart;
+	int			drawend;
+}				t_render;
 
 typedef struct	s_vars
 {
-	t_screen	screen;
-	t_map		map;
-	t_cub		cub;
-	t_player	player;
-	t_mlx		mlx;
-	t_key		key;
-	t_camera	cam;
-	t_texture	tex;
-	t_engine	eng;
-	t_sprite	spr;
-	t_nextframe	nframe;
-	short		image;
-	short		save;
+	t_screen		screen;
+	t_map			map;
+	t_cub			cub;
+	t_player		player;
+	t_mlx			mlx;
+	t_key			key;
+	t_camera		cam;
+	t_texture		tex;
+	t_engine		eng;
+	t_sprite		spr;
+	t_nextframe		nframe;
+	t_render		ren;
+	short			image;
+	short			save;
+	unsigned int 	color;
 }				t_vars;
 
 int	ft_puterror(char *s);
@@ -167,8 +191,12 @@ int parse_main(t_vars *vars, char *argv);
 
 /*
 ** Render
+** senddir | Also has the search hit function.
 */
 void renderframe(t_vars *vars);
+void senddir(t_vars *vars);
+void calculatedraw(t_vars *vars);
+
 /*
 **	Coloring
 */
@@ -193,9 +221,6 @@ void	look_left(t_vars *vars);
 void	look_right(t_vars *vars);
 void	walk_right(t_vars *vars);
 void	walk_left(t_vars *vars);
-void wallsides(t_vars *vars);
-
-void swap(double *xp, double *yp);
 
 /*
 ** Open image
@@ -210,8 +235,21 @@ int file_sprite(t_vars *vars);
 ** Sorting
 */
 void swap(double *xp, double *yp);
+
+/*
+** Screenshot
+*/
 int createbmp(t_vars *vars);
-int		ft_strsearch(char *line, char *str);
+
+/*
+** Sprite
+*/
+void sprite(t_vars *vars, int i);
+
+
+
+void wallsides(t_vars *vars);
+int	ft_strsearch(char *line, char *str);
 #endif
 
 /*

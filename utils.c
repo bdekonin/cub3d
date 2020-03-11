@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/06 19:22:53 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/10 18:42:13 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/11 17:11:05 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	ft_puterror(char *s)
 {
-	system("leaks cub3D");
+	// system("leaks cub3D");
 	ft_putstr_fd("Error\n", 1);
 	ft_putstr_fd(s, 1);
 	return (-1);

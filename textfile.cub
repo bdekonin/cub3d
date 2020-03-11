@@ -3,17 +3,17 @@ EA ./textures/bluestone.png
 C   1,0,255
 F255,0,0      
 
-R 400 400
+R 10000 100000
 NO       ./textures/redbrick.png
 WE       ./textures/mo ssy.png
 S ./textures/barrel.png                            
 
 111111
-1000011
-1000001
-10000011
+1200011
+10020011
+100000211
 1E000001
 10000011
-1000001
+1200001
 1000011
 111111
