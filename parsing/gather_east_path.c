@@ -6,16 +6,16 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 17:10:21 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/02 17:19:03 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/11 12:02:36 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse_data.h"
 
-static int read_valid_image(int fd)
+static int		read_valid_image(int fd)
 {
-	char buf[10];
-	int ret;
+	char	buf[10];
+	int		ret;
 
 	if (read(fd, buf, 10) < 0)
 		return (-1);

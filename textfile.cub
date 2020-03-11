@@ -1,19 +1,19 @@
 SO ./textures/file3.xpm
 EA ./textures/bluestone.png
-      C      01,0,255
-      F       255,0,0      
+C   1,0,255
+F255,0,0      
 
-      R 400 400
+R 400 400
 NO       ./textures/redbrick.png
-      WE       ./textures/mossy.png
+WE       ./textures/mo ssy.png
 S ./textures/barrel.png                            
 
 111111
-100001
+1000011
 1000001
-1000001
+10000011
 1E000001
+10000011
 1000001
-1000001
-100001
-11111
+1000011
+111111

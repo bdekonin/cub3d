@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 17:32:40 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/10 21:49:36 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/11 12:02:11 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int				get_ceiling(char *line, t_data *data)
 	while (*line == ' ' && *line != '\0')
 		line++;
 	if (!ft_isdigit(*line) || ft_strsearch(line, " ,0123456789") == 0)
-			return (ft_puterror("get_ceiling | invalid character found in line."));
+		return (ft_puterror("get_ceiling | invalid character found in line."));
 	if (data->ceiling[0] >= 0 && data->ceiling[1] >= 0 && data->ceiling[2] >= 0)
 	{
 		return (ft_puterror("get_ceiling | multiple elements found."));

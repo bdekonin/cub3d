@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 22:01:48 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/10 19:24:44 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/11 12:17:34 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,8 @@ static int	spawnpoint(t_data *data, int x, int y, int i)
 	if (data->line[i] == 'N' || data->line[i] == 'S' ||
 	data->line[i] == 'E' || data->line[i] == 'W')
 	{
-		// printf("HERE");
 		if (data->spawn_pos_y > 0 && data->spawn_pos_x > 0)
 		{
-			// free_array((void*)data->sprite, data->sprite_count);
-			// free(data->sprite);
 			free(data->line);
 			return (ft_puterror("One or more spawns found."));
 		}
@@ -46,6 +43,25 @@ static int	read_until_start(t_data *data)
 	return (0);
 }
 
+static int copy_line_2(t_data *data, int x, int y, int i)
+{
+	if (spawnpoint(data, x, y, i) < 0)
+		return (-1);
+	if (data->line[i] == '2')
+		save_sprite(data, y, x);
+	if (data->line[i] == '0' || data->line[i] == '1' || \
+	data->line[i] == '2')
+		data->map[y][x] = data->line[i] - 48;
+	else if (data->line[i] == ' ')
+		data->map[y][x] = 9;
+	else
+	{
+		free(data->line);
+		return (ft_puterror("Invalid character found in map."));
+	}
+	return (0);
+}
+
 static int copy_line(t_data *data, int x, int y, int i)
 {
 	while (data->ret > 0)
@@ -57,19 +73,8 @@ static int copy_line(t_data *data, int x, int y, int i)
 			return (ft_puterror("invalid map | empty line found."));
 		while (data->line[i] != '\0')
 		{
-			if (spawnpoint(data, x, y, i) < 0)
+			if (copy_line_2(data, x, y, i) == -1)
 				return (-1);
-			if (data->line[i] == '2')
-				save_sprite(data, y, x);
-			if (data->line[i] == '0' || data->line[i] == '1' || data->line[i] == '2')
-				data->map[y][x] = data->line[i] - 48;
-			else if (data->line[i] == ' ')
-				data->map[y][x] = 9;
-			else
-			{
-				free(data->line);
-				return (ft_puterror("Invalid character found in map."));
-			}
 			x++;
 			i++;
 		}

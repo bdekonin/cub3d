@@ -6,14 +6,14 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 15:29:10 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/11 11:05:22 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/11 11:50:04 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse_data.h"
 #include "../cub3d.h"
 
-int		missing_elem(t_data *data)
+int			missing_elem(t_data *data)
 {
 	if (data->malloced[0] == 'N' || data->malloced[1] == 'N' ||
 	data->malloced[2] == 'N' || data->malloced[3] == 'N' ||
@@ -76,7 +76,6 @@ int			parse_free(t_data *data)
 		free(data->sprite_path);
 	if (data->malloced[5] == 'Y')
 	{
-		// free_map(data, data->map_height);
 		free_array((void*)data->map, data->map_height);
 		free(data->map);
 	}
@@ -88,7 +87,7 @@ int			parse_free(t_data *data)
 	return (-1);
 }
 
-int free_array(void **arr, int count)
+int			free_array(void **arr, int count)
 {
 	while (count > 0)
 	{
