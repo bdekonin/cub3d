@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/06 19:15:35 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/10 15:22:21 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/10 16:44:24 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "get_next_line/get_next_line.h"
 # include "libft/libft.h"
 # include "parsing/parse_data.h"
-# include "mms_minilibx/mlx.h"
+# include "mlx/mlx.h"
 
 # include <math.h>
 # include <fcntl.h>

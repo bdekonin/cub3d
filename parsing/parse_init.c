@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:05:55 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/09 17:35:03 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/10 18:33:09 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,5 @@ void	parse_init(t_data *data)
 	data->malloced[3] = 'N'; // West
 	data->malloced[4] = 'N'; // Sprite
 	data->malloced[5] = 'N'; // Map
-	data->malloced[6] = 'N'; // sprite map
 	data->sprite_count = 0;
 }

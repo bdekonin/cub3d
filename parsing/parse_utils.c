@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 15:29:10 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/09 20:35:57 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/10 18:33:13 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ void		transfer_map(t_data *data)
 	}
 }
 
-void		free_map(t_data *data)
-{
-	while (data->map_height > 0)
-	{
-		data->map_height--;
-		free(data->map[data->map_height]);
-	}
-}
+// void		free_map(t_data *data)
+// {
+// 	while (data->map_height > 0)
+// 	{
+// 		data->map_height--;
+// 		free(data->map[data->map_height]);
+// 	}
+// }
 
 size_t		ft_strlen_nospace(const char *s)
 {
@@ -80,13 +80,24 @@ int			parse_free(t_data *data)
 		free(data->sprite_path);
 	if (data->malloced[5] == 'Y')
 	{
-		free_map(data);
+		// free_map(data, data->map_height);
+		free_array((void*)data->map, data->map_height);
 		free(data->map);
 	}
-	if (data->malloced[6] == 'Y')
+	if (data->sprite_count > 0)
 	{
 		free_sprites(data, data->sprite_count);
 		free(data->sprite);
+	}
+	return (-1);
+}
+
+int free_array(void **arr, int count)
+{
+	while (count > 0)
+	{
+		count--;
+		free(arr[count]);
 	}
 	return (-1);
 }

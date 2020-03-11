@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 22:01:48 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/10 14:41:49 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/10 19:24:44 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@ static int	spawnpoint(t_data *data, int x, int y, int i)
 	if (data->line[i] == 'N' || data->line[i] == 'S' ||
 	data->line[i] == 'E' || data->line[i] == 'W')
 	{
+		// printf("HERE");
 		if (data->spawn_pos_y > 0 && data->spawn_pos_x > 0)
 		{
-			free_array(data, y + 2);
-			free(data->map);
+			// free_array((void*)data->sprite, data->sprite_count);
+			// free(data->sprite);
 			free(data->line);
 			return (ft_puterror("One or more spawns found."));
 		}
@@ -56,7 +57,6 @@ static int copy_line(t_data *data, int x, int y, int i)
 			return (ft_puterror("invalid map | empty line found."));
 		while (data->line[i] != '\0')
 		{
-
 			if (spawnpoint(data, x, y, i) < 0)
 				return (-1);
 			if (data->line[i] == '2')
@@ -65,6 +65,11 @@ static int copy_line(t_data *data, int x, int y, int i)
 				data->map[y][x] = data->line[i] - 48;
 			else if (data->line[i] == ' ')
 				data->map[y][x] = 9;
+			else
+			{
+				free(data->line);
+				return (ft_puterror("Invalid character found in map."));
+			}
 			x++;
 			i++;
 		}
@@ -98,7 +103,7 @@ int		replace_map(t_data *data, char *argv)
 	return (1);
 }
 
-int		free_array(t_data *data, int i)
+int		free_map(t_data *data, int i)
 {
 	while (i > 0)
 	{
@@ -149,23 +154,21 @@ int		copy_map(t_data *data, char *argv)
 		if (!data->map[i])
 		{
 			free(data->map);
-			return (free_array(data, i));
+			return (free_map(data, i));
 		}
 		i++;
 	}
+	data->malloced[5] = 'Y';		
 	if (data->sprite_count > 0)
+	{
 		if (make_sprite(data) == -1)
 		{
-			data->malloced[5] = 'Y';		
 			return (-1);
 		}
+	}
 	if (replace_map(data, argv) != 1)
 		return (-1);
 	if (data->spawn_pos_y == -1 && data->spawn_pos_x == -1)
-	{
-		data->malloced[5] = 'Y';
 		return (ft_puterror("No Spawning point found."));
-	}
-	data->malloced[5] = 'Y';
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 13:41:15 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/10 16:42:39 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/11 09:31:21 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int create_img(t_vars *vars, char *filename)
     vars->nframe.addr = mlx_get_data_addr(vars->nframe.img, &vars->nframe.bits_pixel, &vars->nframe.line_length,
                                  &vars->nframe.endian);
 	free(ptr);
+	system("leaks cub3D");
 	if (file_north(vars) == -1)
 		return (-1);
 	if (file_east(vars) == -1)

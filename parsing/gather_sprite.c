@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:14:22 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/10 15:09:54 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/10 17:44:06 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,5 @@ int		free_sprites(t_data *data, int i)
 		i--;
 		free(data->sprite[i]);
 	}
-	ft_puterror("Malloc has failed for sprites.");
 	return (-1);
 }

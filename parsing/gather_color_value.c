@@ -6,33 +6,18 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 17:32:40 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/02/19 14:03:47 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/10 21:49:36 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse_data.h"
 
-static int		check_line(char *line)
-{
-	int i;
-
-	i = 0;
-	while (line[i] != '\0')
-	{
-		while (!ft_isdigit(line[i]) && line[i] != 'F' &&
-		line[i] != 'C' && line[i] != ' ' && line[i] != ',')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 static void		parse_rgb(char *line, int *r, int *g, int *b)
 {
-	while (*line == 'F' || *line == 'C' || *line == ' ' || *line == ',')
+	while ((*line == ' ' || *line == ',') && *line != '\0')
 		line++;
 	*r = ft_atoi(line);
-	while (ft_isdigit(*line) || *line == '-')
+	while (ft_isdigit(*line) && *line != '\0')
 		line++;
 	if (*g == -1 && *b == -1)
 		parse_rgb(line, g, b, r);
@@ -45,7 +30,10 @@ static void		parse_rgb(char *line, int *r, int *g, int *b)
 
 int				get_floor(char *line, t_data *data)
 {
-	if (check_line(line) == 0)
+	line++;
+	while (*line == ' ' && *line != '\0')
+		line++;
+	if (!ft_isdigit(*line) || ft_strsearch(line, " ,0123456789") == 0)
 		return (ft_puterror("get_floor | invalid character found in line."));
 	if (data->floor[0] >= 0 && data->floor[1] >= 0 && data->floor[2] >= 0)
 	{
@@ -63,8 +51,11 @@ int				get_floor(char *line, t_data *data)
 
 int				get_ceiling(char *line, t_data *data)
 {
-	if (check_line(line) == 0)
-		return (ft_puterror("get_ceiling | invalid character found in line."));
+	line++;
+	while (*line == ' ' && *line != '\0')
+		line++;
+	if (!ft_isdigit(*line) || ft_strsearch(line, " ,0123456789") == 0)
+			return (ft_puterror("get_ceiling | invalid character found in line."));
 	if (data->ceiling[0] >= 0 && data->ceiling[1] >= 0 && data->ceiling[2] >= 0)
 	{
 		return (ft_puterror("get_ceiling | multiple elements found."));
@@ -75,7 +66,7 @@ int				get_ceiling(char *line, t_data *data)
 	data->ceiling[0] = (ft_counter(line, ',') == 2) ? data->ceiling[0] : -1;
 	if (data->ceiling[0] < 0 || data->ceiling[1] < 0 || data->ceiling[2] < 0)
 	{
-		return (ft_puterror("get_floor | invalid rgb value."));
+		return (ft_puterror("get_ceiling | invalid rgb value."));
 	}
 	return (1);
 }

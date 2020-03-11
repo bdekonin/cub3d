@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 13:14:11 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/02/24 16:36:11 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/10 17:30:18 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,13 @@ void		read_map(char *line, int *width, int *height, int *sprite);
 void	parse_init(t_data *data);
 int			*fill_line(int width);
 
-int		free_array(t_data *data, int i);
+int		free_map(t_data *data, int i);
+int		free_array(void **arr, int count);
 int		check_next(t_data *data, int row, int col, int prev);
 int		check_path(t_data *data, int row, int col, int prev);
 int		copy_map(t_data *data, char *argv);
 size_t	ft_strlen_nospace(const char *s);
-void	ree_map(t_data *data);
+// void	free_map(t_data *data);
 void	transfer_map(t_data *data);
 int		missing_elem(t_data *data);
 int		parse_free(t_data *data);
