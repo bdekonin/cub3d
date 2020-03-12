@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 13:14:11 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/11 12:50:10 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/12 09:35:29 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,6 @@ int		free_sprites(t_data *data, int i);
 void	save_sprite(t_data *data, int y, int x);
 int		make_sprite(t_data *data);
 void	calculate_dist(t_data *data);
+char 	*read_filepath(char *line);
 
 #endif

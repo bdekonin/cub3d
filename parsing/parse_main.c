@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:26:42 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/11 17:47:55 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/12 09:46:42 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,31 +128,30 @@ int parse_main(t_vars *vars, char *argv)
 		else if (data.line[i] == 'N')
 		{
 			i++;
-			if (data.line[i] == 'O' && get_north(data.line, &data) == -1)
+			if (data.line[i] == 'O' && get_north(data.line + 2, &data) == -1)
 				data.error = -1;
 		}
 		else if (data.line[i] == 'E')
 		{
 			i++;
-			if (data.line[i] == 'A' && get_east(data.line, &data) == -1)
+			if (data.line[i] == 'A' && get_east(data.line + 2, &data) == -1)
 				data.error = -1;
 		}
 		else if (data.line[i] == 'S')
 		{
-			i++;
-			if (data.line[i] == 'O')
+			// i++;
+			if (data.line[i + 1] == 'O')
 			{
-				if (get_south(data.line, &data) == -1)			
+				if (get_south(data.line + 2, &data) == -1)			
 				data.error = -1;
 			}
 			else
-				if (get_sprite(data.line, &data) == -1)
+				if (get_sprite(data.line + 1, &data) == -1)
 					data.error = -1;
 		}
 		else if (data.line[i] == 'W')
 		{
-			i++;
-			if (data.line[i] == 'E' && get_west(data.line, &data) == -1)
+			if (data.line[i + 1] == 'E' && get_west(data.line + 2, &data) == -1)
 				data.error = -1;
 		}
 		else if (data.line[i] == 'C' && get_ceiling(data.line + i, &data) == -1)

@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 13:41:15 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/11 18:39:02 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/12 09:10:53 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int createmlx(t_vars *vars, char *filename)
 	if (!vars->mlx.img)
 		return (ft_puterror("Failed creating mlx image."));
     vars->mlx.addr = mlx_get_data_addr(vars->mlx.img, &vars->mlx.bits_pixel, &vars->mlx.line_length,
-                                 &vars->mlx.endian);
+                                											&vars->mlx.endian);
 	if (!vars->mlx.addr)
 		return (ft_puterror("Failed getting mlx address."));
     vars->nframe.img = mlx_new_image(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h);
@@ -69,41 +69,6 @@ int create_img(t_vars *vars, char *filename)
 	return (1);
 }
 
-void sortsprite_one(t_vars *vars)
-{
-	for (int i = 0; i < vars->spr.sprite_count - 1; i++)
-	{
-		for (int i = 0; i < vars->spr.sprite_count - 1; i++)
-		{
-			if (vars->spr.sprite[i][2] < vars->spr.sprite[i + 1][2])
-			{
-				swap(&vars->spr.sprite[i][0], &vars->spr.sprite[i + 1][0]);
-				swap(&vars->spr.sprite[i][1], &vars->spr.sprite[i + 1][1]);
-				swap(&vars->spr.sprite[i][2], &vars->spr.sprite[i + 1][2]);
-			}
-		}
-	}
-}
-
-void calculate_dist_one(t_vars *vars)
-{
-	int i;
-	int y;
-	int x;
-
-	i = 0;
-	while (i < vars->spr.sprite_count)
-	{
-		x = vars->player.pos_x - vars->spr.sprite[i][1];
-		x *= (x < 0) ? -1 : 1;
-		y = vars->player.pos_y - vars->spr.sprite[i][0];
-		y *= (y < 0) ? -1 : 1;
-		vars->spr.sprite[i][2] = sqrt(y + x);
-		i++;
-	}
-	sortsprite_one(vars);
-}
-
 int	main(int argc, char **argv)
 {
 	t_vars		vars;
@@ -134,91 +99,6 @@ int	main(int argc, char **argv)
 	exit(0);
 }
 
-void renderframe(t_vars *vars)
-{
-	vars->spr.texwidth = 64;
-	vars->spr.texheight = 64;
-	size_t i;
-
-	i = 0;
-
-	for(int x = 0; x < vars->screen.screen_w; x++)
-	{
-		vars->cam.camera_x = 2 * x / (double)vars->screen.screen_w - 1;
-		vars->eng.raydir_x = vars->player.dir_x + vars->cam.planeX * vars->cam.camera_x;
-		vars->eng.raydir_y = vars->player.dir_y + vars->cam.planeY * vars->cam.camera_x;
-		vars->map.pos_x = (int)vars->player.pos_x;
-		vars->map.pos_y = (int)vars->player.pos_y;
-
-		vars->eng.delta_dist_x = fabs(1 / vars->eng.raydir_x);
-		vars->eng.delta_dist_y = fabs(1 / vars->eng.raydir_y);
-
-		vars->eng.hit = 0;
-		senddir(vars);
-		wallsides(vars);
-		calculatedraw(vars);
-
-		//texturing calculations
-		// // // int texNum = vars->map.map[vars->map.pos_y][vars->map.pos_x]; //1 subtracted from it so that texture 0 can be used!
-			double wallX;
-			if (vars->eng.side == 0)
-				wallX = vars->player.pos_y + vars->eng.perp_wall_dist * vars->eng.raydir_y;
-			else
-				wallX = vars->player.pos_x + vars->eng.perp_wall_dist * vars->eng.raydir_x;
-			wallX -= floor((wallX));
-
-		vars->ren.tex_x = (int)(wallX * (double)(vars->spr.texwidth));
-		if (vars->eng.side == 0 && vars->eng.raydir_x > 0)
-			vars->ren.tex_x = vars->spr.texwidth - vars->ren.tex_x - 1;
-		if (vars->eng.side == 1 && vars->eng.raydir_y < 0)
-			vars->ren.tex_x = vars->spr.texwidth - vars->ren.tex_x - 1;
-
-
-		// How much to increase the texture coordinate per screen pixel
-    	vars->ren.step = 1.0 * vars->spr.texheight / vars->ren.lineheight;
-		vars->ren.tex_pos = (vars->ren.drawstart - vars->screen.screen_h / 2 + vars->ren.lineheight / 2) * vars->ren.step;
-
-		draw_wall(vars, x);
-		vars->spr.zbuffer[x] = vars->eng.perp_wall_dist;
-		fill_background(x, vars->ren.drawstart, vars->ren.drawend, vars);
-	}
-	while (i < vars->spr.sprite_count)
-	{
-		sprite(vars, i);
-		i++;
-	}
-	calculate_dist_one(vars);
-}
-
-int testing(t_vars *vars)
-{
-	renderframe(vars);
-	if (vars->key.esc == 1)
-		close_win(vars);
-	if (vars->key.w == 1)
-		forward(vars);
-	else if (vars->key.s == 1)
-		backwards(vars);
-	if (vars->key.l_arr == 1)
-		look_left(vars);
-	else if (vars->key.r_arr == 1)
-		look_right(vars);
-	if (vars->key.a == 1)
-		walk_left(vars);
-	else if (vars->key.d == 1)
-		walk_right(vars);
-	if (vars->image == 0)
-	{
-		mlx_put_image_to_window(vars->mlx.mlx, vars->mlx.mlx_win, vars->mlx.img, 0, 0);
-		vars->image = 1;
-	}
-	else
-	{
-		mlx_put_image_to_window(vars->mlx.mlx, vars->mlx.mlx_win, vars->nframe.img, 0, 0);
-		vars->image = 0;
-	}
-	return (1);
-}
 
 int initialize_rendering(t_vars *vars)
 {
@@ -240,7 +120,7 @@ int initialize_rendering(t_vars *vars)
 
 int engine(t_vars *vars)
 {
-	mlx_loop_hook(vars->mlx.mlx, testing, vars);
+	mlx_loop_hook(vars->mlx.mlx, frame_loop, vars);
 	mlx_hook(vars->mlx.mlx_win, 2, (1L << 0), key_press, vars);
 	mlx_hook(vars->mlx.mlx_win, 3, (1L << 1), key_release, vars);
 	mlx_hook(vars->mlx.mlx_win, 17, 0L, close_win, vars);
