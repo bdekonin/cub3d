@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 17:32:40 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/11 12:02:11 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/12 09:50:09 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 
 static void		parse_rgb(char *line, int *r, int *g, int *b)
 {
-	while ((*line == ' ' || *line == ',') && *line != '\0')
+	if (*line == ',')
 		line++;
+	while (*b == -1 && *line == ' ' && *line != '\0')
+		line++;
+	if (*line == ' ')
+		*line = '\0';
 	*r = ft_atoi(line);
 	while (ft_isdigit(*line) && *line != '\0')
 		line++;
@@ -31,6 +35,8 @@ static void		parse_rgb(char *line, int *r, int *g, int *b)
 int				get_floor(char *line, t_data *data)
 {
 	line++;
+	if (*line != ' ')
+		return (ft_puterror("get_floor | invalid rgb value."));
 	while (*line == ' ' && *line != '\0')
 		line++;
 	if (!ft_isdigit(*line) || ft_strsearch(line, " ,0123456789") == 0)
