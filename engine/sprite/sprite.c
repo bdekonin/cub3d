@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/11 15:24:30 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/11 17:53:19 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/11 19:33:00 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void drawspritex(t_vars *vars)
 	}
 }
 
-static void calculate_sprites(t_vars *vars, int i)
+static void calculate_sprites(t_vars *vars, size_t i)
 {
 	vars->spr.sprite_y = vars->spr.sprite[i][0] - vars->player.pos_y;
 	vars->spr.sprite_x = vars->spr.sprite[i][1] - vars->player.pos_x;
@@ -67,7 +67,7 @@ static void calculate_sprites(t_vars *vars, int i)
 	vars->screen.screen_h / 2;
 }
 
-void sprite(t_vars *vars, int i)
+void sprite(t_vars *vars, size_t i)
 {
 	calculate_sprites(vars, i);
 	if (vars->spr.drawstart_y < 0)
