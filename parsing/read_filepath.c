@@ -6,16 +6,16 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/12 09:33:38 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/12 09:36:18 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/12 17:32:34 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse_data.h"
 
-static int read_valid_image(int fd)
+static int	read_valid_image(int fd)
 {
-	char buf[10];
-	int ret;
+	char	buf[10];
+	int		ret;
 
 	if (read(fd, buf, 10) < 0)
 		return (-1);
@@ -24,7 +24,7 @@ static int read_valid_image(int fd)
 	return (1);
 }
 
-char *read_filepath(char *line)
+char		*read_filepath(char *line)
 {
 	int		fd;
 	char	*path;
@@ -48,6 +48,6 @@ char *read_filepath(char *line)
 		free(path);
 		return ("file");
 	}
-	close (fd);
+	close(fd);
 	return (path);
 }

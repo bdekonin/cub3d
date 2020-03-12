@@ -6,16 +6,16 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:14:22 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/10 17:44:06 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/12 13:00:03 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse_data.h"
 
-static double			*fill_line_sprite(int width)
+static double	*fill_line_sprite(int width)
 {
-	double *array;
-	int i;
+	double	*array;
+	int		i;
 
 	array = malloc(sizeof(double) * width);
 	if (!array)
@@ -29,9 +29,7 @@ static double			*fill_line_sprite(int width)
 	return (array);
 }
 
-
-
-int make_sprite(t_data *data)
+int				make_sprite(t_data *data)
 {
 	int i;
 
@@ -53,7 +51,7 @@ int make_sprite(t_data *data)
 	return (1);
 }
 
-void save_sprite(t_data *data, int y, int x)
+void			save_sprite(t_data *data, int y, int x)
 {
 	static int i;
 
@@ -64,7 +62,7 @@ void save_sprite(t_data *data, int y, int x)
 	i++;
 }
 
-int		free_sprites(t_data *data, int i)
+int				free_sprites(t_data *data, int i)
 {
 	while (i > 0)
 	{

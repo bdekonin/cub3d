@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 16:20:37 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/09 21:00:49 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/12 19:03:26 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int		read_resolution(char *line, int *x, int *y)
 {
-	while (*line == 'R' || *line == ' ')
+	while (*line == ' ')
 		line++;
 	*x = ft_atoi(line);
 	while (ft_isdigit(*line) && *line != '\0')
@@ -22,6 +22,10 @@ static int		read_resolution(char *line, int *x, int *y)
 	while (*line == ' ')
 		line++;
 	*y = ft_atoi(line);
+	while (ft_isdigit(*line) && *line != '\0')
+		line++;
+	if (!ft_strsearch(line, "0123456789"))
+		return (-1);
 	if (*x > 0 && *y > 0)
 		return (1);
 	return (-1);

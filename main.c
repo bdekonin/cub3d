@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 13:41:15 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/12 09:10:53 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/12 12:58:29 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int createmlx(t_vars *vars, char *filename)
 		return (ft_puterror("Failed creating mlx pointer."));
 	if (vars->save == 0)
 		vars->mlx.mlx_win = mlx_new_window(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h, filename);
-	if (!vars->mlx.mlx_win)
+	if (vars->save == 0 && !vars->mlx.mlx_win)
 		return (ft_puterror("Failed creating mlx window."));
     vars->mlx.img = mlx_new_image(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h);
 	if (!vars->mlx.img)
@@ -50,8 +50,11 @@ int create_img(t_vars *vars, char *filename)
 	ptr = ft_strjoin("cub3d | ", filename);
 	if (!ptr)
 		return (ft_puterror("Malloc failed."));
-	if (!createmlx(vars, filename))
+	if (createmlx(vars, filename) == -1)
+	{
+		free(ptr);
 		return (-1);
+	}
 	free(ptr);
 	vars->spr.zbuffer = malloc(sizeof(double) * vars->screen.screen_w);
 	if (!vars->spr.zbuffer)
@@ -96,6 +99,7 @@ int	main(int argc, char **argv)
 		createbmp(&vars);
 	else
 		engine(&vars);
+	// free(vars.spr.zbuffer);
 	exit(0);
 }
 

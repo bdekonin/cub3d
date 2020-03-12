@@ -6,38 +6,36 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 21:06:39 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/09 21:07:04 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/12 13:25:22 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse_data.h"
 
-void swap(double *xp, double *yp)  
-{  
-	double temp;
-	
-	temp = *xp;
-	*xp = *yp;
-	*yp = temp;
-}
-
-void sortsprite_init(t_data *data)
+static void		swap_sprites_data(t_data *data)
 {
-	for (int i = 0; i < data->sprite_count - 1; i++)
+	int i;
+	int j;
+
+	j = 0;
+	while (j < data->sprite_count - 1)
 	{
-		for (int i = 0; i < data->sprite_count - 1; i++)
+		i = 0;
+		while (i < data->sprite_count - 1)
 		{
 			if (data->sprite[i][2] < data->sprite[i + 1][2])
 			{
-				swap(&data->sprite[i][0], &data->sprite[i + 1][0]);
-				swap(&data->sprite[i][1], &data->sprite[i + 1][1]);
-				swap(&data->sprite[i][2], &data->sprite[i + 1][2]);
+				ft_swap(&data->sprite[i][0], &data->sprite[i + 1][0]);
+				ft_swap(&data->sprite[i][1], &data->sprite[i + 1][1]);
+				ft_swap(&data->sprite[i][2], &data->sprite[i + 1][2]);
 			}
+			i++;
 		}
+		j++;
 	}
 }
 
-void calculate_dist(t_data *data)
+void			calculate_dist(t_data *data)
 {
 	int i;
 	int y;
@@ -53,5 +51,5 @@ void calculate_dist(t_data *data)
 		data->sprite[i][2] = sqrt(y + x);
 		i++;
 	}
-	sortsprite_init(data);
+	swap_sprites_data(data);
 }

@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 11:10:50 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/11 18:20:44 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/12 11:39:54 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 ** width's for the texture. so a higher quality texture will not have the same
 ** resolution as a 8bit picture.
 */
-static void set_texturesize(t_vars *vars)
+
+static void		set_texturesize(t_vars *vars)
 {
 	if (vars->tex.w_tex == 'N')
 	{
@@ -41,13 +42,15 @@ static void set_texturesize(t_vars *vars)
 	}
 }
 
-
 /*
 ** This will calculate which texture has to be printed.
-** it will use mostly the step_x or step_y var to see which side should be which.
-** if the raydir_x < 0 step_x is -1; So its to the left and this will give us the East texture;
+** it will use mostly the step_x or step_y var to see which side,
+** should be which.
+** if the raydir_x < 0 step_x is -1; So its to the left and this will give us,
+** the East texture;
 */
-void wallsides(t_vars *vars)
+
+void			wallsides(t_vars *vars)
 {
 	if (vars->eng.side == 0)
 	{

@@ -1,0 +1,136 @@
+[38;5;160mNorme: ./cub3d.h[0m
+Error: file must end with a single empty line
+Error: global scope bad aligned
+Error (line 14): wrong number of spaces in preprocessor indentation
+Error (line 39, col 8): planeX not unixcase
+Error (line 40, col 8): planeY not unixcase
+Error (line 48, col 5): bad spacing
+Error (line 49): must begin only by tabulations
+Error (line 49): bad indentation
+Error (line 49, col 8): bad spacing
+Error (line 86, col 5): bad spacing
+Error (line 123): s_engine and t_engine not aligned.
+Error (line 123): must have only tabulations between struct and s_engine.
+Error (line 138): s_sprite and t_sprite not aligned.
+Error (line 138): must have only tabulations between struct and s_sprite.
+Error (line 159): s_render and t_render not aligned.
+Error (line 159): must have only tabulations between struct and s_render.
+Error (line 161, col 4): bad spacing
+Error (line 162, col 4): bad spacing
+Error (line 163, col 4): bad spacing
+Error (line 168, col 7): bad spacing
+Error (line 187, col 13): bad spacing
+Error (line 194): multiple empty lines
+Error (line 256): multiple empty lines
+Error (line 257): multiple empty lines
+Error (line 260, col 3): bad spacing
+
+[38;5;76mNorme: ./parsing/flood_map.c[0m
+[38;5;76mNorme: ./parsing/gather_resolution.c[0m
+[38;5;76mNorme: ./parsing/gather_sprite.c[0m
+[38;5;160mNorme: ./parsing/gather_map.c[0m
+Error (line 70): spaces at the end of line
+Error (line 70, col 24): bad character after ;
+Error (line 72): bad indentation
+
+[38;5;160mNorme: ./parsing/parse_data.h[0m
+Error (line 53): multiple empty lines
+
+[38;5;76mNorme: ./parsing/parse_init.c[0m
+[38;5;76mNorme: ./parsing/gather_color_value.c[0m
+[38;5;76mNorme: ./parsing/gather_texture.c[0m
+[38;5;76mNorme: ./parsing/read_filepath.c[0m
+[38;5;76mNorme: ./parsing/sortsprite.c[0m
+[38;5;76mNorme: ./parsing/parse_utils.c[0m
+[38;5;76mNorme: ./parsing/read_map.c[0m
+[38;5;160mNorme: ./parsing/parse_main.c[0m
+Error: 6 functions in the file
+Error (line 69): function line_select has 26 lines
+Error (line 87): line has 83 characters
+Error (line 89): line has 88 characters
+Error (line 139): spaces at the end of line
+Error (line 139, col 19): bad character after ;
+
+[38;5;160mNorme: ./main.c[0m
+Error: global scope bad aligned
+Error (line 18): declaration of initialize_rendering forbidden in .c
+Error (line 19): declaration of engine forbidden in .c
+Error (line 21): Space before function name
+Error (line 27): line has 115 characters
+Error (line 30): line has 96 characters
+Error (line 30): must begin only by tabulations
+Error (line 30): bad indentation
+Error (line 33): line has 101 characters
+Error (line 33): must begin only by tabulations
+Error (line 33): bad indentation
+Error (line 34): line has 96 characters
+Error (line 34): must begin only by tabulations
+Error (line 37): line has 99 characters
+Error (line 37): must begin only by tabulations
+Error (line 37): bad indentation
+Error (line 40): line has 113 characters
+Error (line 40): must begin only by tabulations
+Error (line 40): bad indentation
+Error (line 41): must begin only by tabulations
+Error (line 47): Space before function name
+Error (line 47): declarations must be followed by one empty line in create_img
+Error (line 75): bad spacing after main
+Error (line 75): function main has 27 lines
+Error (line 102): C++ comment
+Error (line 102): bad indentation
+Error (line 106): multiple empty lines
+Error (line 107): bad spacing before initialize_rendering
+Error (line 107): Space before function name
+Error (line 107): declarations must be followed by one empty line in initialize_rendering
+Error (line 119): line has 89 characters
+Error (line 120): line has 89 characters
+Error (line 125): Space before function name
+
+[38;5;160mNorme: ./utils.c[0m
+Error: file must end with a single empty line
+Error: global scope bad aligned
+Error (line 18): C++ comment
+Error (line 18): bad indentation
+Error (line 46): Space before function name
+Error (line 46): Space before function name
+Error (line 46): Space before function name
+Error (line 46): Space before function name
+Error (line 46): Space before function name
+Error (line 46): declarations must be followed by one empty line in ft_charsearch
+Error (line 46, col 3): bad spacing
+Error (line 48): must begin only by tabulations
+Error (line 48): bad indentation
+Error (line 49): must begin only by tabulations
+Error (line 49): bad indentation
+Error (line 50): must begin only by tabulations
+Error (line 50): bad indentation
+Error (line 51): must begin only by tabulations
+Error (line 51): bad indentation
+Error (line 52): must begin only by tabulations
+Error (line 52): bad indentation
+Error (line 53): must begin only by tabulations
+Error (line 53): bad indentation
+Error (line 54): must begin only by tabulations
+Error (line 54): bad indentation
+Error (line 55): must begin only by tabulations
+Error (line 55): bad indentation
+Error (line 56): must begin only by tabulations
+Error (line 56): bad indentation
+Error (line 57, col 0): no newline after block
+
+[38;5;76mNorme: ./engine/bmp/createbmp.c[0m
+[38;5;76mNorme: ./engine/pixels/fill_background.c[0m
+[38;5;76mNorme: ./engine/pixels/my_pixel_put.c[0m
+[38;5;76mNorme: ./engine/render/calculatedraw.c[0m
+[38;5;76mNorme: ./engine/keys/look.c[0m
+[38;5;76mNorme: ./engine/keys/key.c[0m
+[38;5;76mNorme: ./engine/render/draw_wall.c[0m
+[38;5;76mNorme: ./engine/keys/walking.c[0m
+[38;5;76mNorme: ./engine/render/side.c[0m
+[38;5;76mNorme: ./engine/render/step.c[0m
+[38;5;76mNorme: ./engine/render/rayhit.c[0m
+[38;5;76mNorme: ./engine/render/main_render.c[0m
+[38;5;76mNorme: ./engine/render/wallsides.c[0m
+[38;5;76mNorme: ./engine/sprite/sprite.c[0m
+[38;5;76mNorme: ./engine/render/create_image.c[0m
+[38;5;76mNorme: ./engine/sprite/sort.c[0m

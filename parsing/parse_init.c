@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:05:55 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/11 12:50:12 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/12 16:56:10 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	parse_init(t_data *data)
 	data->ceiling[1] = -1;
 	data->ceiling[2] = -1;
 	data->error = 1;
-
 	data->map_height = 0;
 	data->map_width = 0;
 	data->map_start = -1;
@@ -32,11 +31,11 @@ void	parse_init(t_data *data)
 	data->spawn_pos_x = -1;
 	data->spawn_pos_y = -1;
 	data->ret = 1;
-	data->malloced[0] = 'N'; // North
-	data->malloced[1] = 'N'; // South
-	data->malloced[2] = 'N'; // East
-	data->malloced[3] = 'N'; // West
-	data->malloced[4] = 'N'; // Sprite
-	data->malloced[5] = 'N'; // Map
+	data->malloced[0] = 'N';
+	data->malloced[1] = 'N';
+	data->malloced[2] = 'N';
+	data->malloced[3] = 'N';
+	data->malloced[4] = 'N';
+	data->malloced[5] = 'N';
 	data->sprite_count = 0;
 }

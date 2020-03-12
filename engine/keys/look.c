@@ -6,11 +6,18 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 12:14:21 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/09 12:15:31 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/12 15:21:19 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+
+/*
+** To rotate you have to change your direction,
+** this works by changes the coordinates on the 'eenheidscirkel',
+** which is leading the way of looking.
+** cos for x | sin for y. the angle is always in radians.
+*/
 
 void		look_left(t_vars *vars)
 {

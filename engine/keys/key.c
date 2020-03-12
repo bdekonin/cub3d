@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/21 14:31:59 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/10 15:37:54 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/12 10:32:28 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int		close_win(t_vars *vars)
 	mlx_destroy_window(vars->mlx.mlx, vars->mlx.mlx_win);
 	mlx_destroy_image(vars->mlx.mlx, vars->mlx.img);
 	mlx_destroy_image(vars->mlx.mlx, vars->nframe.img);
-	// system("leaks cub3D");
 	exit(0);
 	return (1);
 }

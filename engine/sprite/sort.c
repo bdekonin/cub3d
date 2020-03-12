@@ -6,30 +6,36 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/11 19:31:14 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/11 19:32:34 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/12 13:23:05 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-
-static void sortsprite_one(t_vars *vars)
+void		swap_sprites(t_vars *vars)
 {
-	for (int i = 0; i < vars->spr.sprite_count - 1; i++)
+	int i;
+	int j;
+
+	j = 0;
+	while (j < vars->spr.sprite_count - 1)
 	{
-		for (int i = 0; i < vars->spr.sprite_count - 1; i++)
+		i = 0;
+		while (i < vars->spr.sprite_count - 1)
 		{
 			if (vars->spr.sprite[i][2] < vars->spr.sprite[i + 1][2])
 			{
-				swap(&vars->spr.sprite[i][0], &vars->spr.sprite[i + 1][0]);
-				swap(&vars->spr.sprite[i][1], &vars->spr.sprite[i + 1][1]);
-				swap(&vars->spr.sprite[i][2], &vars->spr.sprite[i + 1][2]);
+				ft_swap(&vars->spr.sprite[i][0], &vars->spr.sprite[i + 1][0]);
+				ft_swap(&vars->spr.sprite[i][1], &vars->spr.sprite[i + 1][1]);
+				ft_swap(&vars->spr.sprite[i][2], &vars->spr.sprite[i + 1][2]);
 			}
+			i++;
 		}
+		j++;
 	}
 }
 
-void sort_sprites(t_vars *vars)
+void		sort_sprites(t_vars *vars)
 {
 	int i;
 	int y;
@@ -45,5 +51,5 @@ void sort_sprites(t_vars *vars)
 		vars->spr.sprite[i][2] = sqrt(y + x);
 		i++;
 	}
-	sortsprite_one(vars);
+	swap_sprites(vars);
 }

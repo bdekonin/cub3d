@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/06 13:34:03 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/12 09:42:55 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/12 17:06:28 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,20 @@ static int	createbmpimage(t_vars *vars, int fd, int padding)
 			vars->mlx.line_length + x * (vars->mlx.bits_pixel / 8)));
 			if (write(fd, &color, 3) < 0)
 				return (ft_puterror("Write failed while writing in bmp."));
-			if (padding == 1 && write(fd, "\0", 1) < 0)
-				return (ft_puterror("Write failed while writing in bmp."));
-			if (padding == 2 && write(fd, "\0\0", 2) < 0)
-				return (ft_puterror("Write failed while writing in bmp."));
-			if (padding == 3 && write(fd, "\0\0\0", 3) < 0)
-				return (ft_puterror("Write failed while writing in bmp."));
 			x++;
 		}
+		if (padding == 1 && write(fd, "\0", 1) < 0)
+			return (ft_puterror("Write failed while writing in bmp."));
+		if (padding == 2 && write(fd, "\0\0", 2) < 0)
+			return (ft_puterror("Write failed while writing in bmp."));
+		if (padding == 3 && write(fd, "\0\0\0", 3) < 0)
+			return (ft_puterror("Write failed while writing in bmp."));
 		y--;
 	}
 	return (1);
 }
 
-static int createheader(t_vars *vars, int fd, int filesize)
+static int	createheader(t_vars *vars, int fd, int filesize)
 {
 	unsigned char header[54];
 
@@ -55,12 +55,12 @@ static int createheader(t_vars *vars, int fd, int filesize)
 	ft_memcpy(header + 22, &vars->screen.screen_h, 4);
 	header[26] = 1;
 	header[28] = 24;
-	if (write (fd, header, 54) < 0)
+	if (write(fd, header, 54) < 0)
 		return (ft_puterror("Could not write header in 'save.bmp' file."));
 	return (1);
 }
 
-int createbmp(t_vars *vars)
+int			createbmp(t_vars *vars)
 {
 	int fd;
 	int filesize;
@@ -70,8 +70,9 @@ int createbmp(t_vars *vars)
 	fd = open("save.bmp", O_WRONLY | O_TRUNC | O_CREAT, 0666);
 	if (fd < 0)
 		return (ft_puterror("Could not create 'save.bmp' file."));
-	padding = (4 - (vars->screen.screen_w  * 3) % 4) % 4;
-	filesize = 54 + 3 * (vars->screen.screen_w + padding) * vars->screen.screen_h;
+	padding = (4 - ((vars->screen.screen_w * 3) % 4)) % 4;
+	filesize = 54 + 3 * (vars->screen.screen_w + padding) *\
+										vars->screen.screen_h;
 	if (createheader(vars, fd, filesize) == -1)
 		return (-1);
 	if (createbmpimage(vars, fd, padding) == -1)

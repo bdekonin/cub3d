@@ -6,21 +6,37 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/11 19:24:44 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/11 19:37:01 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/12 11:37:06 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-static void main_render(t_vars *vars, size_t x)
+static void		put_image_to_window(t_vars *vars)
 {
-    while (x < vars->screen.screen_w)
+	if (vars->image == 0)
+	{
+		mlx_put_image_to_window(vars->mlx.mlx, \
+			vars->mlx.mlx_win, vars->mlx.img, 0, 0);
+		vars->image = 1;
+	}
+	else
+	{
+		mlx_put_image_to_window(vars->mlx.mlx, \
+			vars->mlx.mlx_win, vars->nframe.img, 0, 0);
+		vars->image = 0;
+	}
+}
+
+static void		main_render(t_vars *vars, size_t x)
+{
+	while (x < vars->screen.screen_w)
 	{
 		vars->cam.camera_x = 2 * x / (double)vars->screen.screen_w - 1;
-		vars->eng.raydir_x = vars->player.dir_x + vars->cam.planeX * 
-                                                        vars->cam.camera_x;
-		vars->eng.raydir_y = vars->player.dir_y + vars->cam.planeY * 
-                                                        vars->cam.camera_x;
+		vars->eng.raydir_x = vars->player.dir_x + vars->cam.planeX * \
+														vars->cam.camera_x;
+		vars->eng.raydir_y = vars->player.dir_y + vars->cam.planeY * \
+														vars->cam.camera_x;
 		vars->map.pos_x = (int)vars->player.pos_x;
 		vars->map.pos_y = (int)vars->player.pos_y;
 		vars->eng.delta_dist_x = fabs(1 / vars->eng.raydir_x);
@@ -34,19 +50,19 @@ static void main_render(t_vars *vars, size_t x)
 		draw_wall(vars, x);
 		vars->spr.zbuffer[x] = vars->eng.perp_wall_dist;
 		fill_background(x, vars->ren.drawstart, vars->ren.drawend, vars);
-        x++;
+		x++;
 	}
 }
 
-void renderframe(t_vars *vars)
+void			renderframe(t_vars *vars)
 {
-	vars->spr.texwidth = 64;
-	vars->spr.texheight = 64;
 	size_t i;
 	size_t x;
 
-	x = 0;
 	i = 0;
+	x = 0;
+	vars->spr.texwidth = 64;
+	vars->spr.texheight = 64;
 	main_render(vars, x);
 	while (i < vars->spr.sprite_count)
 	{
@@ -56,7 +72,7 @@ void renderframe(t_vars *vars)
 	sort_sprites(vars);
 }
 
-int frame_loop(t_vars *vars)
+int				frame_loop(t_vars *vars)
 {
 	renderframe(vars);
 	if (vars->key.esc == 1)
@@ -73,15 +89,6 @@ int frame_loop(t_vars *vars)
 		walk_left(vars);
 	else if (vars->key.d == 1)
 		walk_right(vars);
-	if (vars->image == 0)
-	{
-		mlx_put_image_to_window(vars->mlx.mlx, vars->mlx.mlx_win, vars->mlx.img, 0, 0);
-		vars->image = 1;
-	}
-	else
-	{
-		mlx_put_image_to_window(vars->mlx.mlx, vars->mlx.mlx_win, vars->nframe.img, 0, 0);
-		vars->image = 0;
-	}
+	put_image_to_window(vars);
 	return (1);
 }

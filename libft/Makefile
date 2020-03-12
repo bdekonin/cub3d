@@ -6,7 +6,7 @@
 #    By: bdekonin <bdekonin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/29 12:24:22 by bdekonin       #+#    #+#                 #
-#    Updated: 2020/02/13 18:41:36 by bdekonin      ########   odam.nl          #
+#    Updated: 2020/03/12 13:13:41 by bdekonin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ OFILES = $(SRCS:.c=.o)
 BONUS_SRC = $(SRCS) ft_lstadd_back_bonus.c ft_lstadd_front_bonus.c \
 ft_lstlast_bonus.c ft_lstnew_bonus.c ft_lstsize_bonus.c \
 ft_lstdelone_bonus.c ft_lstiter_bonus.c ft_lstclear_bonus.c \
-ft_lstmap_bonus.c
+ft_lstmap_bonus.c ft_swap.c
 
 BONUS_OFILES = $(OFILES) $(BONUS_SRC:.c=.o)
 

@@ -6,16 +6,21 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/02 12:16:36 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/09 12:22:38 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/12 11:22:57 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-int file_sprite(t_vars *vars)
+/*
+** This will create an image for the correct filetype.
+** It will also set all the nessecary items to the correct value's.
+*/
+
+int		file_sprite(t_vars *vars)
 {
 	char *p;
-	
+
 	p = ft_strrchr(vars->cub.sprite, '.');
 	if (ft_strncmp(p, ".png", 5) == 0)
 		vars->tex.img[4] = mlx_png_file_to_image(vars->mlx.mlx, \
@@ -35,10 +40,10 @@ int file_sprite(t_vars *vars)
 	return (1);
 }
 
-int file_west(t_vars *vars)
+int		file_west(t_vars *vars)
 {
 	char *p;
-	
+
 	p = ft_strrchr(vars->cub.west, '.');
 	if (ft_strncmp(p, ".png", 5) == 0)
 		vars->tex.img[3] = mlx_png_file_to_image(vars->mlx.mlx, \
@@ -58,10 +63,10 @@ int file_west(t_vars *vars)
 	return (1);
 }
 
-int file_south(t_vars *vars)
+int		file_south(t_vars *vars)
 {
 	char *p;
-	
+
 	p = ft_strrchr(vars->cub.south, '.');
 	if (ft_strncmp(p, ".png", 5) == 0)
 		vars->tex.img[2] = mlx_png_file_to_image(vars->mlx.mlx, \
@@ -81,10 +86,10 @@ int file_south(t_vars *vars)
 	return (1);
 }
 
-int file_east(t_vars *vars)
+int		file_east(t_vars *vars)
 {
 	char *p;
-	
+
 	p = ft_strrchr(vars->cub.east, '.');
 	if (ft_strncmp(p, ".png", 5) == 0)
 		vars->tex.img[1] = mlx_png_file_to_image(vars->mlx.mlx, \
@@ -104,10 +109,10 @@ int file_east(t_vars *vars)
 	return (1);
 }
 
-int file_north(t_vars *vars)
+int		file_north(t_vars *vars)
 {
 	char *p;
-	
+
 	p = ft_strrchr(vars->cub.north, '.');
 	if (ft_strncmp(p, ".png", 5) == 0)
 		vars->tex.img[0] = mlx_png_file_to_image(vars->mlx.mlx, \

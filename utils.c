@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/06 19:22:53 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/11 17:11:05 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/12 18:09:55 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,17 @@ int		ft_strsearch(char *line, char *str)
 		i++;
 	}
 	return (1);
+}
+
+int     ft_charsearch(char c, char *str)
+{
+    int i;
+    i = 0;
+    while (str[i] != '\0')
+    {
+        if (str[i] == c)
+            return (1);
+        i++;
+    }
+    return (0);
 }

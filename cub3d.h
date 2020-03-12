@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/06 19:15:35 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/11 19:37:06 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/12 17:52:24 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,7 +209,6 @@ void step(t_vars *vars);
 */
 void	fill_background(int x, int start, int end, t_vars *vars);
 void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
-void	drawline(int x, double start, double end, int color, t_vars *vars);
 
 /*
 **	Key function
@@ -252,12 +251,13 @@ int createbmp(t_vars *vars);
 ** Sprite
 */
 void sprite(t_vars *vars, size_t i);
-void sort_sprites(t_vars *vars);
+void		sort_sprites(t_vars *vars);
 
 
 
 void wallsides(t_vars *vars);
 int	ft_strsearch(char *line, char *str);
+int     ft_charsearch(char c, char *str);
 #endif
 
 /*
