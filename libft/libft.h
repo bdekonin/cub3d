@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/05 08:07:31 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/12 13:14:18 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/13 13:12:44 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,7 @@ void				ft_lstclear(t_list **lst, void (*del)(void*));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *), \
 void (*del)(void *));
 void				ft_swap(double *xp, double *yp);
+int					ft_strsearch(char *line, char *str);
+int					ft_charsearch(char c, char *str);
 
 #endif

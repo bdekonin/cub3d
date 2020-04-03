@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/12 09:33:38 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/12 17:32:34 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/13 18:34:55 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static int	read_valid_image(int fd)
 {
 	char	buf[10];
-	int		ret;
 
 	if (read(fd, buf, 10) < 0)
 		return (-1);

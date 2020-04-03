@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 13:41:15 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/12 12:58:29 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/14 16:13:15 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,30 @@
 #include <math.h>
 #include <stdio.h>
 
-int initialize_rendering(t_vars *vars);
-int engine(t_vars *vars);
-
 static int createmlx(t_vars *vars, char *filename)
 {
 	vars->mlx.mlx = mlx_init();
 	if (!vars->mlx.mlx)
 		return (ft_puterror("Failed creating mlx pointer."));
 	if (vars->save == 0)
-		vars->mlx.mlx_win = mlx_new_window(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h, filename);
+		vars->mlx.mlx_win = mlx_new_window(vars->mlx.mlx, \
+				vars->screen.screen_w, vars->screen.screen_h, filename);
 	if (vars->save == 0 && !vars->mlx.mlx_win)
 		return (ft_puterror("Failed creating mlx window."));
-    vars->mlx.img = mlx_new_image(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h);
+    vars->mlx.img = mlx_new_image(vars->mlx.mlx, vars->screen.screen_w, \
+												vars->screen.screen_h);
 	if (!vars->mlx.img)
 		return (ft_puterror("Failed creating mlx image."));
-    vars->mlx.addr = mlx_get_data_addr(vars->mlx.img, &vars->mlx.bits_pixel, &vars->mlx.line_length,
-                                											&vars->mlx.endian);
+    vars->mlx.addr = mlx_get_data_addr(vars->mlx.img, \
+		&vars->mlx.bits_pixel, &vars->mlx.line_length, &vars->mlx.endian);
 	if (!vars->mlx.addr)
 		return (ft_puterror("Failed getting mlx address."));
-    vars->nframe.img = mlx_new_image(vars->mlx.mlx, vars->screen.screen_w, vars->screen.screen_h);
+    vars->nframe.img = mlx_new_image(vars->mlx.mlx, \
+					vars->screen.screen_w, vars->screen.screen_h);
 	if (!vars->nframe.img)
 		return (ft_puterror("Failed creating mlx image."));
-    vars->nframe.addr = mlx_get_data_addr(vars->nframe.img, &vars->nframe.bits_pixel, &vars->nframe.line_length,
-                                 &vars->nframe.endian);
+    vars->nframe.addr = mlx_get_data_addr(vars->nframe.img, \
+	&vars->nframe.bits_pixel, &vars->nframe.line_length, &vars->nframe.endian);
 	if (!vars->nframe.addr)
 		return (ft_puterror("Failed getting mlx address."));
 	return (1);
@@ -47,10 +47,11 @@ static int createmlx(t_vars *vars, char *filename)
 int create_img(t_vars *vars, char *filename)
 {
 	char *ptr;
+
 	ptr = ft_strjoin("cub3d | ", filename);
 	if (!ptr)
 		return (ft_puterror("Malloc failed."));
-	if (createmlx(vars, filename) == -1)
+	if (createmlx(vars, ptr) == -1)
 	{
 		free(ptr);
 		return (-1);
@@ -99,7 +100,7 @@ int	main(int argc, char **argv)
 		createbmp(&vars);
 	else
 		engine(&vars);
-	// free(vars.spr.zbuffer);
+	free(vars.spr.zbuffer);
 	exit(0);
 }
 
@@ -108,6 +109,7 @@ int initialize_rendering(t_vars *vars)
 {
 	int x;
 	int y;
+
 	init_key(vars);
 	vars->cam.rot_speed = 0.05;
 	vars->cam.move_speed = 0.09;
@@ -116,8 +118,10 @@ int initialize_rendering(t_vars *vars)
 	if (vars->save == 0)
 	{
 		mlx_get_screen_size(vars->mlx.mlx, &x, &y);
-		vars->screen.screen_h = (vars->screen.screen_h > y) ? y : vars->screen.screen_h;
-		vars->screen.screen_w = (vars->screen.screen_w > x) ? x : vars->screen.screen_w;
+		vars->screen.screen_h = (vars->screen.screen_h > y) ? y : \
+													vars->screen.screen_h;
+		vars->screen.screen_w = (vars->screen.screen_w > x) ? x : \
+												vars->screen.screen_w;
 	}
 	return (1);
 }

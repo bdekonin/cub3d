@@ -6,13 +6,13 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/21 14:31:59 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/12 10:32:28 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/13 13:17:38 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-int		close_win(t_vars *vars)
+int			close_win(t_vars *vars)
 {
 	mlx_destroy_window(vars->mlx.mlx, vars->mlx.mlx_win);
 	mlx_destroy_image(vars->mlx.mlx, vars->mlx.img);
@@ -21,7 +21,7 @@ int		close_win(t_vars *vars)
 	return (1);
 }
 
-int		key_press(int keycode, t_vars *vars)
+int			key_press(int keycode, t_vars *vars)
 {
 	if (keycode == 53)
 		vars->key.esc = 1;

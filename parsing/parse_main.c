@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:26:42 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/12 18:59:18 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/13 18:49:16 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,11 @@ static int		parse_loop(t_data *data)
 		}
 		while (data->line[i] == ' ' && data->line[i] != '\0')
 			i++;
+		if (data->line[i] == '\0' && i != 0)
+		{
+			ft_puterror("Invalid line");
+			return (parse_free(data));
+		}
 		if (data->line[i] != '\0' && line_select(data, i) == -1)
 			data->error = -1;	
 		free(data->line);

@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/11 19:24:44 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/12 11:37:06 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/13 13:22:16 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void		put_image_to_window(t_vars *vars)
 	}
 }
 
-static void		main_render(t_vars *vars, size_t x)
+static void		main_render(t_vars *vars, int x)
 {
 	while (x < vars->screen.screen_w)
 	{
@@ -56,8 +56,8 @@ static void		main_render(t_vars *vars, size_t x)
 
 void			renderframe(t_vars *vars)
 {
-	size_t i;
-	size_t x;
+	int i;
+	int x;
 
 	i = 0;
 	x = 0;

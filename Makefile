@@ -6,7 +6,7 @@
 #    By: bdekonin <bdekonin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/03/06 18:06:17 by bdekonin       #+#    #+#                 #
-#    Updated: 2020/03/12 16:50:39 by bdekonin      ########   odam.nl          #
+#    Updated: 2020/03/14 14:53:06 by bdekonin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ $(NAME): $(OBJ) $(MLX)
 	@$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(LIB) 
 	
 %.o: %.c
-	@gcc -Imlx -Iinc -Ilibft -c $< -o $@
+	$(CC) -Imlx -Iinc -Ilibft -c $< -o $@
 
 .PHONY: clean fclean re
 

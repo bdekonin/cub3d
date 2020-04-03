@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   utils.c                                            :+:    :+:            */
+/*   ft_charsearch_bonus.c                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/06 19:22:53 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/04/03 13:02:58 by bdekonin      ########   odam.nl         */
+/*   Created: 2020/03/13 13:12:22 by bdekonin       #+#    #+#                */
+/*   Updated: 2020/03/13 13:13:26 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "cub3d.h"
+#include "libft.h"
 
-int	ft_puterror(char *s)
+int		ft_charsearch(char c, char *str)
 {
-	ft_putstr_fd("Error\n", 1);
-	ft_putstr_fd(s, 1);
-	return (-1);
+	int i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
 }

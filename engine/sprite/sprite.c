@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/11 15:24:30 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/12 11:46:19 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/13 13:26:49 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void		calculate_sprites(t_vars *vars, size_t i)
 		vars->screen.screen_h / 2;
 }
 
-void			sprite(t_vars *vars, size_t i)
+void			sprite(t_vars *vars, int i)
 {
 	calculate_sprites(vars, i);
 	if (vars->spr.drawstart_y < 0)

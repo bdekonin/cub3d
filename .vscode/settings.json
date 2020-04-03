@@ -3,6 +3,7 @@
 		"parse_data.h": "c",
 		"chrono": "c",
 		"unordered_map": "c",
-		"cub3d.h": "c"
+		"cub3d.h": "c",
+		"libft.h": "c"
 	}
 }

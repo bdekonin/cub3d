@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 11:10:50 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/12 11:39:54 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/03/13 13:20:25 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,5 @@ void			wallsides(t_vars *vars)
 	else
 		vars->eng.perp_wall_dist = (vars->map.pos_y - vars->player.pos_y +
 		(1 - vars->eng.step_y) / 2) / vars->eng.raydir_y;
+	set_texturesize(vars);
 }
