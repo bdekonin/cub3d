@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/21 14:31:59 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/13 13:17:38 by bdekonin      ########   odam.nl         */
+/*   Created: 2020/02/21 14:31:59 by bdekonin      #+#    #+#                 */
+/*   Updated: 2020/04/06 21:20:09 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int			key_press(int keycode, t_vars *vars)
 	return (1);
 }
 
-int		key_release(int keycode, t_vars *vars)
+int			key_release(int keycode, t_vars *vars)
 {
 	if (keycode == 53)
 		vars->key.esc = 0;
@@ -59,7 +59,7 @@ int		key_release(int keycode, t_vars *vars)
 	return (1);
 }
 
-void	init_key(t_vars *vars)
+void		init_key(t_vars *vars)
 {
 	vars->key.esc = 0;
 	vars->key.w = 0;
