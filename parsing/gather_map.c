@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 22:01:48 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/10 13:28:46 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/10 15:09:42 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ int			copy_map(t_data *data, char *argv)
 		}
 		i++;
 	}
-	data->malloced[5] = 'Y';		
+	data->malloced[5] = 'Y';
 	if (data->sprite_count > 0 && make_sprite(data) == -1)
-			return (-1);
+		return (-1);
 	if (replace_map(data, argv) != 1)
 		return (-1);
 	if (data->spawn_pos_y == -1 && data->spawn_pos_x == -1)

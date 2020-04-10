@@ -5,8 +5,8 @@
 #                                                      +:+                     #
 #    By: bdekonin <bdekonin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
-#    Created: 2019/10/29 12:24:22 by bdekonin       #+#    #+#                 #
-#    Updated: 2020/03/13 13:14:20 by bdekonin      ########   odam.nl          #
+#    Created: 2019/10/29 12:24:22 by bdekonin      #+#    #+#                  #
+#    Updated: 2020/04/10 20:51:46 by bdekonin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ ft_putstr_fd.c ft_split.c ft_strchr.c \
 ft_strdup.c	ft_strjoin.c ft_strlcat.c ft_strlcpy.c \
 ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c \
 ft_strrchr.c ft_substr.c ft_tolower.c ft_toupper.c \
-ft_strtrim.c ft_counter.c
+ft_strtrim.c
 
 OFILES = $(SRCS:.c=.o)
 
@@ -32,7 +32,7 @@ BONUS_SRC = $(SRCS) ft_lstadd_back_bonus.c ft_lstadd_front_bonus.c \
 ft_lstlast_bonus.c ft_lstnew_bonus.c ft_lstsize_bonus.c \
 ft_lstdelone_bonus.c ft_lstiter_bonus.c ft_lstclear_bonus.c \
 ft_lstmap_bonus.c ft_swap_bonus.c ft_strsearch_bonus.c \
-ft_charsearch_bonus.c
+ft_charsearch_bonus.c ft_counter_bonus.c
 
 BONUS_OFILES = $(OFILES) $(BONUS_SRC:.c=.o)
 

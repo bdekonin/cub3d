@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 13:14:11 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/10 13:29:57 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/10 15:03:23 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int				get_floor(char *line, t_data *data);
 int				get_ceiling(char *line, t_data *data);
 char			*read_filepath(char *line);
 size_t			ft_strlen_nospace(char *s);
+int				line_select(t_data *data, int i);
 
 /*
 ** map
@@ -95,4 +96,5 @@ int				check_path(t_data *data, int row, int col, int prev);
 int				missing_elem(t_data *data);
 int				parse_free(t_data *data);
 void			parse_init(t_data *data);
+int				parse_error_check(t_data *data, char *argv);
 #endif

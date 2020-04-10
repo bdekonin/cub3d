@@ -5,7 +5,7 @@ NO ./textures/redbrick.png
 WE ./textures/mo ssy.png
 S ./textures/thing.png
 C 0,255,0    
-F 255,0,0        
+F 255,0,255        
 
         1111111111111111111111111
         1000000000110000000000001      111

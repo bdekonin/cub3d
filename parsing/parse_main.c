@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:26:42 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/10 13:18:12 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/10 15:02:40 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,64 +66,8 @@ static void		copy_data(t_vars *vars, t_data *data)
 	vars->spr.sprite_count = data->sprite_count;
 }
 
-static int		line_select(t_data *data, int i)
+static int		parse_loop(t_data *data, int i)
 {
-	if (data->line[i] == 'R')
-		return (get_resolution(data->line + 1, data));
-	else if (data->line[i] == 'N' && data->line[i + 1] == 'O')
-		return (get_north(data->line + i + 2, data));
-	else if (data->line[i] == 'E' && data->line[i + 1] == 'A')
-		return (get_east(data->line + i + 2, data));
-	else if (data->line[i] == 'S' && data->line[i + 1] == 'O')
-		return (get_south(data->line + i + 2, data));
-	else if (data->line[i] == 'S' && data->line[i + 1] == ' ')
-		return (get_sprite(data->line + i + 1, data));
-	else if (data->line[i] == 'W' && data->line[i + 1] == 'E')
-		return (get_west(data->line + i + 2, data));
-	else if (data->line[i] == 'C')
-		return (get_ceiling(data->line + i, data));
-	else if (data->line[i] == 'F')
-		return (get_floor(data->line + i, data));
-	else if (data->line[i] == '0' || data->line[i] == '1' || data->line[i] == '2')
-	{
-		read_map(data->line, &data->map_width, &data->map_height, &data->sprite_count);
-		if (data->map_start == -1 && (ft_counter(data->line, '1') \
-									+ ft_counter(data->line, '0') > 0))
-			data->map_start = data->count;
-	}
-	else
-		return (ft_puterror("Invalid line."));
-	return (1);
-}
-
-static int		parse_error_check(t_data *data, char *argv)
-{
-	close(data->fd);
-	if (data->map_start == -1)
-	{
-		ft_puterror("map missing.\n");
-		return (parse_free(data));
-	}
-	if (copy_map(data, argv) == -1)
-		return (parse_free(data));
-	if (!check_path(data, data->spawn_pos_y, data->spawn_pos_x, 0))
-	{
-		ft_puterror("flood fill failed\n");
-		return (parse_free(data));
-	}
-	transfer_map(data);
-	if (!missing_elem(data))
-	{
-		ft_puterror("element missing.\n");
-		return (parse_free(data));
-	}
-	return (1);
-}
-
-static int		parse_loop(t_data *data)
-{
-	int i;
-
 	while (data->ret > 0 && data->error != -1)
 	{
 		i = 0;
@@ -158,7 +102,7 @@ int				parse_main(t_vars *vars, char *argv)
 	if (data.fd < 0)
 		return (ft_puterror("Argument not found."));
 	parse_init(&data);
-	if (parse_loop(&data) == -1)
+	if (parse_loop(&data, 0) == -1)
 		return (-1);
 	if (parse_error_check(&data, argv) == -1)
 		return (-1);

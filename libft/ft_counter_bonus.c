@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_counter.c                                       :+:    :+:            */
+/*   ft_counter_bonus.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/13 18:34:51 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/02/13 18:41:04 by bdekonin      ########   odam.nl         */
+/*   Created: 2020/02/13 18:34:51 by bdekonin      #+#    #+#                 */
+/*   Updated: 2020/04/10 20:52:12 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_counter(const char *s, char c)
 {
-	size_t i;
-	int count;
+	size_t	i;
+	int		count;
 
 	i = 0;
 	count = 0;

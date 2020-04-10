@@ -5,8 +5,8 @@
 #                                                      +:+                     #
 #    By: bdekonin <bdekonin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
-#    Created: 2020/03/06 18:06:17 by bdekonin       #+#    #+#                 #
-#    Updated: 2020/03/14 14:53:06 by bdekonin      ########   odam.nl          #
+#    Created: 2020/03/06 18:06:17 by bdekonin      #+#    #+#                  #
+#    Updated: 2020/04/10 15:03:54 by bdekonin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ SRC = main.c utils.c \
 	engine/sprite/sort.c \
 	parsing/read_filepath.c \
 	parsing/gather_texture.c \
-	parsing/read_map.c
+	parsing/read_map.c \
+	parsing/parse_select.c
 
 OBJ = $(SRC:.c=.o)
 CC = gcc -Wall -Wextra -Werror

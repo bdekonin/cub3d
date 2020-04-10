@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 15:29:10 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/10 13:29:26 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/10 13:52:33 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int			parse_free(t_data *data)
 		free_sprites(data, data->sprite_count);
 		free(data->sprite);
 	}
+	close(data->fd);
 	return (-1);
 }
 
