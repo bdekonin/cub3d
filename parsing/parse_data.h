@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/13 13:14:11 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/12 16:56:08 by bdekonin      ########   odam.nl         */
+/*   Created: 2020/02/13 13:14:11 by bdekonin      #+#    #+#                 */
+/*   Updated: 2020/04/10 13:29:57 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ typedef struct	s_data
 	int			sprite_count;
 	double		**sprite;
 }				t_data;
-
 
 /*
 ** Recieving information

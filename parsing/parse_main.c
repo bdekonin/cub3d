@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/19 14:26:42 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/13 18:49:16 by bdekonin      ########   odam.nl         */
+/*   Created: 2020/02/19 14:26:42 by bdekonin      #+#    #+#                 */
+/*   Updated: 2020/04/10 13:18:12 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ static int		parse_loop(t_data *data)
 			return (parse_free(data));
 		}
 		if (data->line[i] != '\0' && line_select(data, i) == -1)
-			data->error = -1;	
+			data->error = -1;
 		free(data->line);
 		data->count++;
 		if (data->error == -1)

@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/12 15:22:22 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/12 18:58:11 by bdekonin      ########   odam.nl         */
+/*   Created: 2020/04/10 13:28:27 by bdekonin      #+#    #+#                 */
+/*   Updated: 2020/04/10 13:28:28 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ static int		spawnpoint(t_data *data, int x, int y, int i)
 	}
 	return (1);
 }
+
+/*
+** Get next line keeps reading until where the line starts in the .cub file.
+*/
 
 static int		read_until_start(t_data *data)
 {
@@ -86,15 +90,12 @@ static int		copy_line(t_data *data, int x, int y, int i)
 	return (1);
 }
 
+/*
+** This is the main function for copying the map over.
+*/
+
 int				replace_map(t_data *data, char *argv)
 {
-	int x;
-	int y;
-	int i;
-
-	i = 0;
-	x = 0;
-	y = 0;
 	data->count = 0;
 	data->ret = 1;
 	data->fd = open(argv, O_RDONLY);
@@ -102,7 +103,7 @@ int				replace_map(t_data *data, char *argv)
 		return (ft_puterror("can not open file."));
 	if (read_until_start(data) == -1)
 		return (-1);
-	if (copy_line(data, x, y, i) == -1)
+	if (copy_line(data, 0, 0, 0) == -1)
 		return (-1);
 	close(data->fd);
 	return (1);
