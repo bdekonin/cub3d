@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/17 12:27:52 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/02/14 19:05:30 by bdekonin      ########   odam.nl         */
+/*   Created: 2020/01/17 12:27:52 by bdekonin      #+#    #+#                 */
+/*   Updated: 2020/04/12 14:17:36 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int		find_endnull(const char *s)
 	return (i);
 }
 
-static char	*ft_strjoin_endline(char *s1, char *s2, int i, int j)
+static char		*ft_strjoin_endline(char *s1, char *s2, int i, int j)
 {
 	char	*str;
 
@@ -49,7 +49,7 @@ static char	*ft_strjoin_endline(char *s1, char *s2, int i, int j)
 	return (str);
 }
 
-static void	*buf_move(char *src)
+static void		*buf_move(char *src)
 {
 	size_t i;
 	size_t j;
