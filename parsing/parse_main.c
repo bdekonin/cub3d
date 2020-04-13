@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:26:42 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/10 15:02:40 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/13 15:11:24 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,26 @@ static void		copy_dir(t_vars *vars, t_data *data)
 	if (data->spawn_dir == 'N')
 	{
 		vars->player.dir_y = -1;
-		vars->cam.planeX = 0.66;
-		vars->cam.planeY = 0;
+		vars->cam.planex = 0.66;
+		vars->cam.planey = 0;
 	}
 	else if (data->spawn_dir == 'E')
 	{
 		vars->player.dir_x = 1;
 		vars->player.dir_y = 0;
-		vars->cam.planeY = 0.66;
+		vars->cam.planey = 0.66;
 	}
 	else if (data->spawn_dir == 'S')
 	{
 		vars->player.dir_y = 1;
-		vars->cam.planeX = -0.66;
-		vars->cam.planeY = 0;
+		vars->cam.planex = -0.66;
+		vars->cam.planey = 0;
 	}
 	else if (data->spawn_dir == 'W')
 	{
 		vars->player.dir_x = -1;
 		vars->player.dir_y = 0;
-		vars->cam.planeY = -0.66;
+		vars->cam.planey = -0.66;
 	}
 }
 
@@ -47,7 +47,7 @@ static void		copy_data(t_vars *vars, t_data *data)
 	vars->screen.screen_h = data->screen_y;
 	vars->player.pos_x = data->spawn_pos_x;
 	vars->player.pos_y = data->spawn_pos_y;
-	vars->cam.planeX = 0;
+	vars->cam.planex = 0;
 	vars->player.dir_x = 0;
 	copy_dir(vars, data);
 	vars->map.map = data->map;

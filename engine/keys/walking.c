@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/21 14:37:21 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/06 21:20:26 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/13 15:11:24 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,22 @@ void		walk_left(t_vars *vars)
 {
 	int temp;
 
-	temp = vars->player.pos_x - vars->cam.planeX * vars->cam.move_speed;
+	temp = vars->player.pos_x - vars->cam.planex * vars->cam.move_speed;
 	if (vars->map.map[(int)vars->player.pos_y][temp] == 0)
-		vars->player.pos_x -= vars->cam.planeX * vars->cam.move_speed;
-	temp = vars->player.pos_y - vars->cam.planeY * vars->cam.move_speed;
+		vars->player.pos_x -= vars->cam.planex * vars->cam.move_speed;
+	temp = vars->player.pos_y - vars->cam.planey * vars->cam.move_speed;
 	if (vars->map.map[temp][(int)vars->player.pos_x] == 0)
-		vars->player.pos_y -= vars->cam.planeY * vars->cam.move_speed;
+		vars->player.pos_y -= vars->cam.planey * vars->cam.move_speed;
 }
 
 void		walk_right(t_vars *vars)
 {
 	int temp;
 
-	temp = vars->player.pos_x + vars->cam.planeX * vars->cam.move_speed;
+	temp = vars->player.pos_x + vars->cam.planex * vars->cam.move_speed;
 	if (vars->map.map[(int)vars->player.pos_y][temp] == 0)
-		vars->player.pos_x += vars->cam.planeX * vars->cam.move_speed;
-	temp = vars->player.pos_y + vars->cam.planeY * vars->cam.move_speed;
+		vars->player.pos_x += vars->cam.planex * vars->cam.move_speed;
+	temp = vars->player.pos_y + vars->cam.planey * vars->cam.move_speed;
 	if (vars->map.map[temp][(int)vars->player.pos_x] == 0)
-		vars->player.pos_y += vars->cam.planeY * vars->cam.move_speed;
+		vars->player.pos_y += vars->cam.planey * vars->cam.move_speed;
 }

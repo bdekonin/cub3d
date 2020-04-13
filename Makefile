@@ -6,7 +6,7 @@
 #    By: bdekonin <bdekonin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/03/06 18:06:17 by bdekonin      #+#    #+#                  #
-#    Updated: 2020/04/12 14:25:12 by bdekonin      ########   odam.nl          #
+#    Updated: 2020/04/13 09:37:05 by bdekonin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC = main.c utils.c \
 	parsing/read_filepath.c \
 	parsing/gather_texture.c \
 	parsing/read_map.c \
-	parsing/parse_select.c
+	parsing/parse_select.c \
 	engine/pixels/fill_background.c \
 	engine/pixels/my_pixel_put.c \
 	engine/keys/key.c \
@@ -42,7 +42,7 @@ SRC = main.c utils.c \
 	engine/render/main_render.c \
 	engine/sprite/sprite.c \
 	engine/sprite/sort.c \
-	engine/bmp/createbmp.c \
+	engine/bmp/createbmp.c
 
 OBJ = $(SRC:.c=.o)
 CC = gcc -Wall -Wextra -Werror
@@ -73,6 +73,7 @@ clean:
 	@/bin/rm -f *~
 	@/bin/rm -f .DS_Store
 	@$(MAKE) -C libft clean
+	@$(MAKE) -C mlx clean
 
 fclean: clean
 	@/bin/rm -f $(NAME)

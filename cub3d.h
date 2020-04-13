@@ -5,13 +5,13 @@
 /*                                                     +:+                    */
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/06 19:15:35 by bdekonin       #+#    #+#                */
-/*   Updated: 2020/03/14 16:12:39 by bdekonin      ########   odam.nl         */
+/*   Created: 2020/02/06 19:15:35 by bdekonin      #+#    #+#                 */
+/*   Updated: 2020/04/13 15:11:59 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
-#define CUB3D_H
+# define CUB3D_H
 
 # include "get_next_line/get_next_line.h"
 # include "libft/libft.h"
@@ -36,8 +36,8 @@ typedef struct			s_key
 
 typedef struct			s_camera
 {
-	double				planeX;
-	double				planeY;
+	double				planex;
+	double				planey;
 	double				rot_speed;
 	double				move_speed;
 	double				camera_x;
@@ -45,8 +45,8 @@ typedef struct			s_camera
 
 typedef struct			s_mlx
 {
-	void    			*mlx;
-    void    			*mlx_win;
+	void				*mlx;
+	void				*mlx_win;
 	void				*img;
 	char				*addr;
 	int					bits_pixel;
@@ -160,7 +160,7 @@ typedef struct			s_render
 {
 	double				step;
 	double				tex_pos;
-	double 				wall_x;
+	double				wall_x;
 	int					tex_x;
 	int					tex_y;
 	int					lineheight;
@@ -185,6 +185,8 @@ typedef struct			s_vars
 	short				image;
 	short				save;
 	unsigned int		color;
+	int					ret;
+	char				*file_ext;
 }						t_vars;
 
 /*
@@ -205,7 +207,8 @@ void					wallsides(t_vars *vars);
 /*
 **	Coloring
 */
-void					fill_background(int x, int start, int end, t_vars *vars);
+void					fill_background(int x, int start, \
+										int end, t_vars *vars);
 void					my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 
 /*

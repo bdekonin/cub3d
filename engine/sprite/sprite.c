@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/11 15:24:30 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/12 14:19:20 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/13 15:11:24 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ static void		calculate_sprites(t_vars *vars, size_t i)
 {
 	vars->spr.sprite_y = vars->spr.sprite[i][0] - vars->player.pos_y;
 	vars->spr.sprite_x = vars->spr.sprite[i][1] - vars->player.pos_x;
-	vars->spr.invdet = 1.0 / (vars->cam.planeX * vars->player.dir_y - \
-								vars->player.dir_x * vars->cam.planeY);
+	vars->spr.invdet = 1.0 / (vars->cam.planex * vars->player.dir_y - \
+								vars->player.dir_x * vars->cam.planey);
 	vars->spr.transform_x = vars->spr.invdet * (vars->player.dir_y * \
 		vars->spr.sprite_x - vars->player.dir_x * vars->spr.sprite_y);
-	vars->spr.transform_y = vars->spr.invdet * (-vars->cam.planeY * \
-		vars->spr.sprite_x + vars->cam.planeX * vars->spr.sprite_y);
+	vars->spr.transform_y = vars->spr.invdet * (-vars->cam.planey * \
+		vars->spr.sprite_x + vars->cam.planex * vars->spr.sprite_y);
 	vars->spr.spritescreenx = (int)(vars->screen.screen_w / 2) * (1 + \
 		vars->spr.transform_x / vars->spr.transform_y);
 	vars->spr.spriteheight = fabs((int)vars->screen.screen_h / \

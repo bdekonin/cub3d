@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/11 19:24:44 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/06 21:21:39 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/13 15:11:24 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static void		main_render(t_vars *vars, int x)
 	while (x < vars->screen.screen_w)
 	{
 		vars->cam.camera_x = 2 * x / (double)vars->screen.screen_w - 1;
-		vars->eng.raydir_x = vars->player.dir_x + vars->cam.planeX * \
+		vars->eng.raydir_x = vars->player.dir_x + vars->cam.planex * \
 														vars->cam.camera_x;
-		vars->eng.raydir_y = vars->player.dir_y + vars->cam.planeY * \
+		vars->eng.raydir_y = vars->player.dir_y + vars->cam.planey * \
 														vars->cam.camera_x;
 		vars->map.pos_x = (int)vars->player.pos_x;
 		vars->map.pos_y = (int)vars->player.pos_y;
