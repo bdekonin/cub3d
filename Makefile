@@ -6,7 +6,7 @@
 #    By: bdekonin <bdekonin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/03/06 18:06:17 by bdekonin      #+#    #+#                  #
-#    Updated: 2020/04/13 09:37:05 by bdekonin      ########   odam.nl          #
+#    Updated: 2020/04/14 09:41:06 by bdekonin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,8 +58,8 @@ libmlx.dylib:
 
 $(NAME): $(OBJ) $(MLX)
 	@$(MAKE) -C libft bonus
-	@$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(LIB) 
-	
+	@$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(LIB)
+
 %.o: %.c
 	$(CC) -Imlx -Iinc -Ilibft -c $< -o $@
 
@@ -67,7 +67,7 @@ $(NAME): $(OBJ) $(MLX)
 
 norm:
 	norminette $(SRC) $(INCLUDES)
-	
+
 clean:
 	@/bin/rm -f $(OBJ)
 	@/bin/rm -f *~
@@ -78,5 +78,5 @@ clean:
 fclean: clean
 	@/bin/rm -f $(NAME)
 	@$(MAKE) -C libft fclean
-	
+
 re: fclean all
