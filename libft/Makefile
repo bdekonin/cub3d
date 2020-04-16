@@ -6,7 +6,7 @@
 #    By: bdekonin <bdekonin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/29 12:24:22 by bdekonin      #+#    #+#                  #
-#    Updated: 2020/04/10 20:51:46 by bdekonin      ########   odam.nl          #
+#    Updated: 2020/04/15 19:28:27 by bdekonin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ bonus: $(NAME) $(BONUS_OFILES) $(BONUS_SRC)
 	@ar rcs $(NAME) $?
 
 %.o: %.c
-	$(CC) -Wall -Wextra -Werror -c $<
+	@$(CC) -Wall -Wextra -Werror -c $<
 
 clean:
 	@/bin/rm -f $(BONUS_OFILES)

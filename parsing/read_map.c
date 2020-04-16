@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/10 13:28:27 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/10 13:28:28 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/15 21:45:38 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int		copy_line(t_data *data, int x, int y, int i)
 			return (ft_puterror("replace_map | get_next_line failed."));
 		if (ft_counter(data->line, '0') + ft_counter(data->line, '1') == 0 &&
 		(y < data->map_height))
-			return (ft_puterror("invalid map | empty line found."));
+			return (ft_puterror("Empty line found in map"));
 		while (data->line[i] != '\0')
 		{
 			if (copy_line_2(data, x, y, i) == -1)
@@ -100,11 +100,17 @@ int				replace_map(t_data *data, char *argv)
 	data->ret = 1;
 	data->fd = open(argv, O_RDONLY);
 	if (data->fd < 0)
-		return (ft_puterror("can not open file."));
+		return (ft_puterror("Can not open argument."));
 	if (read_until_start(data) == -1)
+	{
+		close(data->fd);
 		return (-1);
+	}
 	if (copy_line(data, 0, 0, 0) == -1)
+	{
+		close(data->fd);
 		return (-1);
+	}
 	close(data->fd);
 	return (1);
 }

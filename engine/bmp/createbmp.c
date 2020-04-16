@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/06 13:34:03 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/06 21:21:16 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/15 20:10:02 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,15 @@ int			createbmp(t_vars *vars)
 	filesize = 54 + 3 * (vars->screen.screen_w + padding) *\
 										vars->screen.screen_h;
 	if (createheader(vars, fd, filesize) == -1)
+	{
+		close(fd);
 		return (-1);
+	}
 	if (createbmpimage(vars, fd, padding) == -1)
+	{
+		close(fd);
 		return (-1);
+	}
+	close(fd);
 	return (1);
 }

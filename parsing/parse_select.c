@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/10 15:01:47 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/10 15:09:25 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/15 21:52:40 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int		line_select_map(t_data *data, int i)
 									+ ft_counter(data->line, '0') > 0))
 			data->map_start = data->count;
 	}
-	else
+	else if (data->line[i] == '\0' && i > 1)
 		return (ft_puterror("Invalid line."));
 	return (1);
 }
@@ -54,20 +54,20 @@ int				parse_error_check(t_data *data, char *argv)
 	close(data->fd);
 	if (data->map_start == -1)
 	{
-		ft_puterror("map missing.\n");
+		ft_puterror("No map found.");
 		return (parse_free(data));
 	}
 	if (copy_map(data, argv) == -1)
 		return (parse_free(data));
 	if (!check_path(data, data->spawn_pos_y, data->spawn_pos_x, 0))
 	{
-		ft_puterror("flood fill failed\n");
+		ft_puterror("Flood fill has failed.");
 		return (parse_free(data));
 	}
 	transfer_map(data);
 	if (!missing_elem(data))
 	{
-		ft_puterror("element missing.\n");
+		ft_puterror("Missing an element.");
 		return (parse_free(data));
 	}
 	return (1);

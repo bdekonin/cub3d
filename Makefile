@@ -6,9 +6,12 @@
 #    By: bdekonin <bdekonin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/03/06 18:06:17 by bdekonin      #+#    #+#                  #
-#    Updated: 2020/04/14 09:41:06 by bdekonin      ########   odam.nl          #
+#    Updated: 2020/04/15 21:28:24 by bdekonin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
+
+NOCOLOR = \033[0m
+MAGENTA = \033[35m
 
 NAME = cub3D
 
@@ -45,38 +48,43 @@ SRC = main.c utils.c \
 	engine/bmp/createbmp.c
 
 OBJ = $(SRC:.c=.o)
-CC = gcc -Wall -Wextra -Werror
-FLAGS = -L. -lmlx -framework OpenGL -framework AppKit
+FLAGS = -Wall -Wextra -Werror -L. -lmlx -framework OpenGL -framework AppKit
 MLX = libmlx.dylib
 LIB = libft/libft.a
-INCLUDES = cub3D.h
+INCLUDES = cub3d.h
 
 all: $(NAME)
 
 libmlx.dylib:
-	@cd mlx && make && mv libmlx.dylib ..
+	@echo "$(MAGENTA)[cub3d] - Compiling $(MLX).$(NOCOLOR)"
+	@cd mlx && make && mv $(MLX) ..
 
 $(NAME): $(OBJ) $(MLX)
 	@$(MAKE) -C libft bonus
 	@$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(LIB)
+	@echo "$(MAGENTA)[cub3d] - Compiled an cub3D executable.$(NOCOLOR)"
 
 %.o: %.c
-	$(CC) -Imlx -Iinc -Ilibft -c $< -o $@
+	@$(CC) -Imlx -Iinc -Ilibft -c $< -o $@
 
 .PHONY: clean fclean re
 
 norm:
-	norminette $(SRC) $(INCLUDES)
+	norminette $(SRC) $(INCLUDES) libft
 
 clean:
 	@/bin/rm -f $(OBJ)
-	@/bin/rm -f *~
 	@/bin/rm -f .DS_Store
 	@$(MAKE) -C libft clean
 	@$(MAKE) -C mlx clean
+	@echo "$(MAGENTA)[cub3d] - Removed All excess files.$(NOCOLOR)"
+
 
 fclean: clean
 	@/bin/rm -f $(NAME)
 	@$(MAKE) -C libft fclean
+	@/bin/rm -f $(MLX)
+	@echo "$(MAGENTA)[cub3d] - Removed libft's library and cub3d executable.$(NOCOLOR)"
+
 
 re: fclean all
