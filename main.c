@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 13:41:15 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/16 17:08:11 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/17 10:57:41 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ int			initialize_rendering(t_vars *vars)
 	int y;
 
 	init_key(vars);
-	vars->cam.rot_speed = 0.05;
-	vars->cam.move_speed = 0.09;
+	vars->cam.rot_speed = ROTATESPEED;
+	vars->cam.move_speed = MOVESPEED;
 	vars->player.pos_x += 0.45;
 	vars->player.pos_y += 0.45;
 	if (vars->save == 0)
