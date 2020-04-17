@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/06 19:15:35 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/17 10:45:31 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/17 11:11:33 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # include <math.h>
 # include <fcntl.h>
 # include <unistd.h>
+
+# define MOVESPEED 0.09
+# define ROTATESPEED 0.05
 
 typedef struct			s_key
 {
