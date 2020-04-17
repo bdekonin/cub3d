@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/06 19:15:35 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/13 15:11:59 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/17 10:45:31 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 
 # include <math.h>
 # include <fcntl.h>
-# include <stdio.h>
 # include <unistd.h>
 
 typedef struct			s_key

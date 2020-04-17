@@ -6,12 +6,11 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/10 15:01:47 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/15 21:52:40 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/17 10:44:05 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse_data.h"
-#include "../cub3d.h"
 
 static int		line_select_map(t_data *data, int i)
 {

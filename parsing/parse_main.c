@@ -6,12 +6,11 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:26:42 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/13 15:11:24 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/17 10:44:16 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse_data.h"
-#include "../cub3d.h"
 
 static void		copy_dir(t_vars *vars, t_data *data)
 {
