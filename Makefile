@@ -6,7 +6,7 @@
 #    By: bdekonin <bdekonin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/03/06 18:06:17 by bdekonin      #+#    #+#                  #
-#    Updated: 2020/04/20 13:51:30 by bdekonin      ########   odam.nl          #
+#    Updated: 2020/04/20 13:53:18 by bdekonin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,8 @@ FLAGS = -Wall -Wextra -Werror -L. -lmlx -framework OpenGL -framework AppKit
 MLX = libmlx.dylib
 LIBFT = libft/libft.a
 INCLUDES = cub3d.h
+
+bonus: all
 
 all: $(NAME)
 
