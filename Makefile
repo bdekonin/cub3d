@@ -6,7 +6,7 @@
 #    By: bdekonin <bdekonin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/03/06 18:06:17 by bdekonin      #+#    #+#                  #
-#    Updated: 2020/04/17 11:02:02 by bdekonin      ########   odam.nl          #
+#    Updated: 2020/04/20 13:51:30 by bdekonin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,7 +81,8 @@ fclean: clean
 	@/bin/rm -f $(NAME)
 	@$(MAKE) -C libft fclean
 	@/bin/rm -f $(MLX)
-	@echo "$(MAGENTA)[cub3d] - Removed libft's library and cub3d executable.$(NOCOLOR)"
+	@echo "$(MAGENTA)[cub3d] - Removed libft's library and \
+	cub3d executable.$(NOCOLOR)"
 
 re: fclean all
 
