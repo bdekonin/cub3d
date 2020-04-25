@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/06 13:34:03 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/15 20:10:02 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/21 22:14:52 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,7 @@ static int	createbmpimage(t_vars *vars, int fd, int padding)
 				return (ft_puterror("Write failed while writing in bmp."));
 			x++;
 		}
-		if (padding == 1 && write(fd, "\0", 1) < 0)
-			return (ft_puterror("Write failed while writing in bmp."));
-		if (padding == 2 && write(fd, "\0\0", 2) < 0)
-			return (ft_puterror("Write failed while writing in bmp."));
-		if (padding == 3 && write(fd, "\0\0\0", 3) < 0)
+		if (write(fd, "\0\0\0\0", padding) < 0)
 			return (ft_puterror("Write failed while writing in bmp."));
 		y--;
 	}
@@ -83,6 +79,7 @@ int			createbmp(t_vars *vars)
 		close(fd);
 		return (-1);
 	}
-	close(fd);
+	if (close(fd) < 0)
+		return (ft_puterror("Could not close file."));
 	return (1);
 }
