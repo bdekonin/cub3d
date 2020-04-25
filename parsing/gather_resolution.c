@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 16:20:37 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/25 15:55:55 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/25 15:58:59 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int				get_resolution(char *line, t_data *data)
 	{
 		return (ft_puterror("get_resolution | invalid resolution."));
 	}
-	if ((data->screen_x < 25 || data->screen_y) && \
-	write(1, "Warning.\nVery small Resolution.", 32) < 0)
+	if ((data->screen_x < 25 || data->screen_y < 25) && \
+	write(1, "Warning.\nVery small Resolution.\n", 33) < 0)
 		return (-1);
 	data->res[0] = 'Y';
 	return (1);
