@@ -6,7 +6,7 @@
 #    By: bdekonin <bdekonin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/03/06 18:06:17 by bdekonin      #+#    #+#                  #
-#    Updated: 2020/04/21 22:29:53 by bdekonin      ########   odam.nl          #
+#    Updated: 2020/04/25 15:57:14 by bdekonin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ libmlx.dylib:
 	@cd mlx && make && mv $(MLX) ..
 
 $(NAME): $(OBJ) $(MLX)
-	@$(MAKE) -C libft bonus
+	@$(MAKE) -C libft
 	@$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(LIBFT)
 	@echo "$(MAGENTA)[cub3d] - Compiled an cub3D executable.$(NOCOLOR)"
 
