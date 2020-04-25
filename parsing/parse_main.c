@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:26:42 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/17 10:44:16 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/21 22:19:59 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ int				parse_main(t_vars *vars, char *argv)
 	parse_init(&data);
 	if (parse_loop(&data, 0) == -1)
 		return (-1);
+	if (close(data.fd) < 0)
+		return (ft_puterror("Could not close fd."));
 	if (parse_error_check(&data, argv) == -1)
 		return (-1);
 	copy_data(vars, &data);
