@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 13:41:15 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/17 10:57:41 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/22 12:14:52 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,16 +88,16 @@ int			main(int argc, char **argv)
 		vars.save = 1;
 	vars.ret = parse_main(&vars, argv[1]);
 	if (vars.ret == -1)
-		exit(1);
+		exit(EXIT_FAILURE);
 	initialize_rendering(&vars);
 	if (create_img(&vars, argv[1]) == -1)
-		exit(1);
+		exit(EXIT_FAILURE);
 	if (vars.save == 1)
 		createbmp(&vars);
 	else
 		engine(&vars);
 	free(vars.spr.zbuffer);
-	exit(0);
+	exit(EXIT_SUCCESS);
 }
 
 int			initialize_rendering(t_vars *vars)
