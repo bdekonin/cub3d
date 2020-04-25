@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/10 15:01:47 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/17 10:44:05 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/21 22:21:47 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int				line_select(t_data *data, int i)
 
 int				parse_error_check(t_data *data, char *argv)
 {
-	close(data->fd);
 	if (data->map_start == -1)
 	{
 		ft_puterror("No map found.");
