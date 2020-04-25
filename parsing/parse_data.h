@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 13:14:11 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/10 15:03:23 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/20 19:29:19 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int				get_sprite(char *line, t_data *data);
 int				get_floor(char *line, t_data *data);
 int				get_ceiling(char *line, t_data *data);
 char			*read_filepath(char *line);
-size_t			ft_strlen_nospace(char *s);
 int				line_select(t_data *data, int i);
 
 /*
