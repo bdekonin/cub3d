@@ -6,7 +6,7 @@
 #    By: bdekonin <bdekonin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/03/06 18:06:17 by bdekonin      #+#    #+#                  #
-#    Updated: 2020/04/20 13:53:18 by bdekonin      ########   odam.nl          #
+#    Updated: 2020/04/21 22:29:53 by bdekonin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,6 +77,7 @@ clean:
 	@/bin/rm -f .DS_Store
 	@$(MAKE) -C libft clean
 	@$(MAKE) -C mlx clean
+	@/bin/rm -f save.bmp
 	@echo "$(MAGENTA)[cub3d] - Removed All excess files.$(NOCOLOR)"
 
 fclean: clean
