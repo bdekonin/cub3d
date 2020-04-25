@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/21 14:31:59 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/22 12:14:29 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/25 17:19:29 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int			close_win(t_vars *vars)
 	mlx_destroy_window(vars->mlx.mlx, vars->mlx.mlx_win);
 	mlx_destroy_image(vars->mlx.mlx, vars->mlx.img);
 	mlx_destroy_image(vars->mlx.mlx, vars->nframe.img);
+	free(vars->spr.zbuffer);
 	exit(EXIT_SUCCESS);
 	return (1);
 }
