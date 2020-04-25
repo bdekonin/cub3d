@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/10 13:28:27 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/15 21:45:38 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/21 22:21:02 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ int				replace_map(t_data *data, char *argv)
 		close(data->fd);
 		return (-1);
 	}
-	close(data->fd);
+	if (close(data->fd) < 0)
+		return (ft_puterror("Could not close fd."));
 	return (1);
 }
