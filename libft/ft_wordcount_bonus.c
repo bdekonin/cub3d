@@ -1,39 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_atoi.c                                          :+:    :+:            */
+/*   ft_wordcount_bonus.c                               :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/11/02 14:18:39 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/23 10:32:05 by bdekonin      ########   odam.nl         */
+/*   Created: 2020/04/23 11:06:47 by bdekonin      #+#    #+#                 */
+/*   Updated: 2020/04/23 11:07:04 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+int		ft_wordcount(char *str)
 {
-	long long int ans;
-	long long int check;
+	int		count;
 
-	ans = 0;
-	check = 1;
-	while ((*str >= 9 && *str <= 13) || *str == 32)
-		str++;
-	if (*str == '-')
-		check = -1;
-	if (*str == '+' || *str == '-')
-		str++;
-	while (ft_isdigit(*str))
+	count = 0;
+	while (*str)
 	{
-		if (ans * 10 + *str - 48 < ans)
+		while (*str && (*str == ' ' || *str == '\n' || *str == '\t'))
+			str++;
+		if (*str && *str != ' ' && *str != '\n' && *str != '\t')
 		{
-			ans = (-1 * check - 1) / 2;
-			return (ans * check);
+			count++;
+			while (*str && *str != ' ' && *str != '\n' && *str != '\t')
+				str++;
 		}
-		ans = (ans * 10) + *str - 48;
-		str++;
 	}
-	return (ans * check);
+	return (count);
 }

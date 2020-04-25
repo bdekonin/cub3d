@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 16:20:37 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/10 13:28:49 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/25 15:53:44 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int		read_resolution(char *line, int *x, int *y)
 	*y = ft_atoi(line);
 	while (ft_isdigit(*line) && *line != '\0')
 		line++;
-	if (!ft_strsearch(line, "0123456789"))
+	if (!ft_strsearch(line, " 0123456789"))
 		return (-1);
 	if (*x > 0 && *y > 0)
 		return (1);
@@ -45,6 +45,8 @@ int				get_resolution(char *line, t_data *data)
 	{
 		return (ft_puterror("get_resolution | invalid resolution."));
 	}
+	if ((data->screen_x < 25 || data->screen_y) && \
+	write(1, "Warning.\nVery small Resolution. It is not playable like this.", 62) < 0)
 	data->res[0] = 'Y';
 	return (1);
 }
