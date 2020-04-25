@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/12 09:33:38 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/10 13:29:35 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/21 22:28:45 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ static int	read_valid_image(int fd)
 	return (1);
 }
 
+static char	*closefd(char *path)
+{
+	free(path);
+	return (NULL);
+}
+
 char		*read_filepath(char *line)
 {
 	int		fd;
@@ -32,7 +38,7 @@ char		*read_filepath(char *line)
 		return ("file");
 	while (*line == ' ')
 		line++;
-	path = ft_substr(line, 0, ft_strlen_nospace(line));
+	path = ft_substr(line, 0, ft_strlen(line));
 	if (!path)
 		return (NULL);
 	fd = open(path, O_RDONLY);
@@ -47,6 +53,7 @@ char		*read_filepath(char *line)
 		free(path);
 		return ("file");
 	}
-	close(fd);
+	if (close(fd) < 0)
+		return (closefd(path));
 	return (path);
 }
