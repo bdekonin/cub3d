@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/21 14:26:30 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/06 21:19:34 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/25 15:50:47 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	fill_background(int x, int start, int end, t_vars *vars)
 	int y;
 
 	y = 0;
-	while (y <= start)
+	while (y < start)
 	{
 		my_mlx_pixel_put(vars, x, y, vars->cub.ceiling_color);
 		y++;
