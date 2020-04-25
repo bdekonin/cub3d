@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 13:14:11 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/25 15:50:12 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/25 18:31:39 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 # include "../get_next_line/get_next_line.h"
 # include "../libft/libft.h"
-# include "../cub3d.h"
-# include <unistd.h>
-# include <fcntl.h>
 # include "../cub3d.h"
 
 typedef struct	s_data
