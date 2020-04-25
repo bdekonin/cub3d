@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/11 18:01:37 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/06 21:21:30 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/25 17:11:22 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ void	calculatedraw(t_vars *vars)
 		vars->ren.drawstart = 0;
 	vars->ren.drawend = vars->ren.lineheight / 2 + vars->screen.screen_h / 2;
 	if (vars->ren.drawend >= vars->screen.screen_h)
-		vars->ren.drawend = vars->screen.screen_h - 1;
+		vars->ren.drawend = vars->screen.screen_h;
 }
