@@ -6,11 +6,12 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 12:14:21 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/13 15:11:24 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/26 07:59:48 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+#include <math.h>
 
 /*
 ** To rotate you have to change your direction,

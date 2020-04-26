@@ -6,11 +6,12 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/11 15:24:30 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/13 15:11:24 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/26 08:00:43 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+#include <math.h>
 
 static void		drawspritey(t_vars *vars, int stripe)
 {

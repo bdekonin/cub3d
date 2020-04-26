@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/06 19:15:35 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/17 11:11:33 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/26 08:04:15 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,6 @@
 # include "libft/libft.h"
 # include "parsing/parse_data.h"
 # include "mlx/mlx.h"
-
-# include <math.h>
-# include <fcntl.h>
-# include <unistd.h>
 
 # define MOVESPEED 0.09
 # define ROTATESPEED 0.05

@@ -6,11 +6,12 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/06 13:34:03 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/21 22:14:52 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/26 07:58:09 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+#include <fcntl.h>
 
 static int	createbmpimage(t_vars *vars, int fd, int padding)
 {

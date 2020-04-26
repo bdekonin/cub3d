@@ -6,11 +6,12 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 21:06:39 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/10 13:29:42 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/26 08:01:17 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse_data.h"
+#include <math.h>
 
 static void		swap_sprites_data(t_data *data)
 {

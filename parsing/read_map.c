@@ -6,11 +6,12 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/10 13:28:27 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/21 22:21:02 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/26 07:57:57 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse_data.h"
+#include <fcntl.h>
 
 static int		spawnpoint(t_data *data, int x, int y, int i)
 {

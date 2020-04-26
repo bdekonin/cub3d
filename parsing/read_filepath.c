@@ -6,18 +6,19 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/12 09:33:38 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/21 22:28:45 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/26 07:57:50 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse_data.h"
+#include <fcntl.h>
 
 static int	read_valid_image(int fd)
 {
 	char	buf[10];
 
 	if (read(fd, buf, 10) < 0)
-		return (-1);
+		return (0);
 	if (!ft_strnstr(buf, "PNG", 10) && !ft_strnstr(buf, "XPM", 10))
 		return (0);
 	return (1);

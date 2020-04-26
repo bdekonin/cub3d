@@ -6,11 +6,12 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/11 19:31:14 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/12 14:19:17 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/26 07:59:33 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+#include <math.h>
 
 void		swap_sprites(t_vars *vars)
 {

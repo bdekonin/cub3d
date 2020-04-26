@@ -6,11 +6,12 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/11 19:12:09 by bdekonin      #+#    #+#                 */
-/*   Updated: 2020/04/06 21:21:46 by bdekonin      ########   odam.nl         */
+/*   Updated: 2020/04/26 08:00:06 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+#include <math.h>
 
 void	side(t_vars *vars)
 {
