@@ -1,0 +1,15 @@
+R 600 600
+NO img/cobblestone.png
+SO img/cobblestone.png
+EA img/cobblestone.png
+WE  img/cobblestone.png
+
+C 255,0,0
+F 255,255,255
+S img/thenun.cub
+
+111111
+12001
+100001
+100N01
+111111
