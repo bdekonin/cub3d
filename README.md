@@ -1,5 +1,7 @@
 # Cub3D
 
+[![CodeFactor](https://www.codefactor.io/repository/github/bdekonin/cub3d/badge/master)](https://www.codefactor.io/repository/github/bdekonin/cub3d/overview/master)
+
 This project is inspired by the world-famous Wolfenstein 3D game, which was the first FPS ever. The goal of this project is to explore the concept of ray-casting by creating a dynamic view inside a maze, in which the user has to find their way. 
 
 This project is an excellent way to practice and refine skills in many areas, including: 
